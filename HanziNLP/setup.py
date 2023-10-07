@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='HanziNLP',
+    name='HanziNLP_sam',
     version='0.1',
     packages=find_packages(),
     author='Zhan Shi',
