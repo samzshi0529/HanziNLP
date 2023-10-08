@@ -58,7 +58,7 @@ def get_font_path(font_name, show=True):
     font_path = os.path.join(FONTS_DIR, font_file)
     if os.path.isfile(font_path):
         if show:
-            text = '你好，世界'
+            text = '你好，世界啊'
             prop = fm.FontProperties(fname=font_path, size=40)
             plt.text(0.5, 0.5, text, fontproperties=prop, ha='center', va='center')
             plt.axis('off')

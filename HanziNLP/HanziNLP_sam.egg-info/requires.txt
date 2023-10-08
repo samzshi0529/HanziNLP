@@ -1,0 +1,2 @@
+jieba>=0.42.1
+matplotlib>=3.4.3

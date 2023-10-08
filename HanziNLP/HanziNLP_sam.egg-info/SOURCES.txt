@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+HanziNLP/__init__.py
+HanziNLP/basic.py
+HanziNLP_sam.egg-info/PKG-INFO
+HanziNLP_sam.egg-info/SOURCES.txt
+HanziNLP_sam.egg-info/dependency_links.txt
+HanziNLP_sam.egg-info/requires.txt
+HanziNLP_sam.egg-info/top_level.txt
