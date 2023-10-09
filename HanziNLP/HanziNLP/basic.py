@@ -42,7 +42,7 @@ def list_fonts():
     List the names of all available fonts.
     """
     font_files = os.listdir(FONTS_DIR)
-    font_names = [os.path.splitext(font)[0] for font in font_files if font.endswith(('.ttf', '.otf'))]
+    font_names = [os.path.splitext(font)[0] for font in font_files if font.endswith(('.ttf', '.otf'))] # Checking for both ttf and otf
     return font_names
 
 def get_font(font_name, show=True):
@@ -78,6 +78,33 @@ def get_font(font_name, show=True):
     else:
         print(f"Font {font_name} not found in both .ttf and .otf formats.")
         return None
+
+# Define the path to the stopwords directory
+STOPWORDS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'stopwords')
+
+def sentence_segment(text):
+    """
+    Segment a large text into sentences.
+
+    Parameters:
+    text (str): The input text.
+
+    Returns:
+    list: A list of sentence strings.
+    """
+    # Adding a space after each punctuation to handle cases with no spacing
+    text = re.sub(r'([。.!?！？])', r'\1 ', text)
+    # Remove extra spaces
+    text = re.sub(r'\s+', ' ', text).strip()
+    # Define a regular expression pattern to split the text at sentence-ending punctuation marks
+    pattern = re.compile(r'(?<=[。.!?！？])\s')
+    # Split the text using the pattern
+    sentences = re.split(pattern, text)
+    # Remove any trailing spaces in each sentence
+    sentences = [sentence.strip() for sentence in sentences if sentence]
+
+    # Return the list of sentences
+    return sentences
 
 
 def list_stopwords():

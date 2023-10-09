@@ -42,10 +42,10 @@ def list_fonts():
     List the names of all available fonts.
     """
     font_files = os.listdir(FONTS_DIR)
-    font_names = [os.path.splitext(font)[0] for font in font_files if font.endswith('.ttf')]
+    font_names = [os.path.splitext(font)[0] for font in font_files if font.endswith(('.ttf', '.otf'))] # Checking for both ttf and otf
     return font_names
 
-def get_font_path(font_name, show=True):
+def get_font(font_name, show=True):
     """
     Get the file path of the specified font.
 
@@ -56,9 +56,18 @@ def get_font_path(font_name, show=True):
     Returns:
     str: The file path of the specified font, or None if the font is not found.
     """
-    font_file = f"{font_name}.ttf"
-    font_path = os.path.join(FONTS_DIR, font_file)
-    if os.path.isfile(font_path):
+    ttf_font_file = f"{font_name}.ttf"
+    otf_font_file = f"{font_name}.otf"
+    ttf_font_path = os.path.join(FONTS_DIR, ttf_font_file)
+    otf_font_path = os.path.join(FONTS_DIR, otf_font_file)
+
+    font_path = None
+    if os.path.isfile(ttf_font_path):
+        font_path = ttf_font_path
+    elif os.path.isfile(otf_font_path):
+        font_path = otf_font_path
+
+    if font_path:
         if show:
             text = '你好，世界'
             prop = fm.FontProperties(fname=font_path, size=40)
@@ -67,7 +76,7 @@ def get_font_path(font_name, show=True):
             plt.show()
         return font_path
     else:
-        print(f"Font {font_name} not found.")
+        print(f"Font {font_name} not found in both .ttf and .otf formats.")
         return None
 
 # Define the path to the stopwords directory
