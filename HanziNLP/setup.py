@@ -16,8 +16,6 @@ setup(
     ],
     include_package_data=True,  # This includes all files in the package
     package_data={
-        'HanziNLP': ['fonts/*.ttf',
-                     'stopwords/*.txt'
-                    ],  # Include all .otf files under the fonts directory
+        'HanziNLP': ['fonts/*.ttf', 'fonts/*.otf', 'stopwords/*.txt']
     },
 )
