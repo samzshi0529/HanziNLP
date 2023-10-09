@@ -6,6 +6,9 @@ import matplotlib.font_manager as fm
 import os
 from collections import Counter
 from collections import defaultdict
+import ipywidgets as widgets
+import pandas as pd
+from IPython.display import display, clear_output
 
 # Suppress informational messages from jieba
 logging.getLogger('jieba').setLevel(logging.WARNING)
@@ -37,30 +40,48 @@ def word_freq(text):
 # Define the path to the fonts directory
 FONTS_DIR = os.path.join(os.path.dirname(__file__), 'fonts')
 
-def list_fonts(filter_text=None):
+def list_fonts():
     """
-    List the names of all available fonts, optionally filtered by a substring.
-
-    Parameters:
-    filter_text (str, optional): Substring to filter fonts by. Defaults to None, showing all fonts.
+    List the names of all available fonts in an interactive table with a button to confirm the selection.
 
     Returns:
-    list: A filtered list of font names.
+    None
     """
     font_files = os.listdir(FONTS_DIR)
-    # Extract font names from both .ttf and .otf files
     font_names = [os.path.splitext(font)[0] for font in font_files if font.endswith(('.ttf', '.otf'))]
+    df = pd.DataFrame(sorted(font_names), columns=['Font Names'])
 
-    if filter_text:
-        # If filter_text is provided, filter fonts based on whether filter_text is in the font name
-        font_names = [font for font in font_names if filter_text.lower() in font.lower()]
-        
-    # Display font names in a user-friendly way
-    for i, font in enumerate(sorted(font_names), 1):
-        print(f"{i}. {font}")
+    text = widgets.Text(
+        value='',
+        placeholder='Type something',
+        description='Filter:',
+        disabled=False
+    )
 
-    # Return the filtered and sorted list of font names
-    return sorted(font_names)
+    button = widgets.Button(description="Confirm")
+    output = widgets.Output()
+
+    # Function to handle button click and filter table
+    def on_button_click(b):
+        with output:
+            clear_output(wait=True)
+            filter_text = text.value
+            if filter_text:
+                display_df = df[df['Font Names'].str.contains(filter_text, case=False, na=False)]
+                print(display_df)
+            else:
+                print(df)
+
+    button.on_click(on_button_click)
+
+    # Creating a horizontal box with the text and button widgets
+    hbox = widgets.HBox([text, button])
+
+    # Initial display of widgets and DataFrame
+    display(hbox, output)
+    with output:
+        print(df)  # Initial DataFrame output
+
 
 def get_font(font_name, show=True):
     """

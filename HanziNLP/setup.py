@@ -12,8 +12,11 @@ setup(
     install_requires=[
         'jieba>=0.42.1',
         'matplotlib>=3.4.3'
-        # add other dependencies as needed
+        # add other core dependencies as needed
     ],
+    extras_require={
+        'interactive': ['ipywidgets>=7.6.3', 'pandas>=1.3.3', 'IPython>=7.27.0']
+    },
     include_package_data=True,  # This includes all files in the package
     package_data={
         'HanziNLP': ['fonts/*.ttf', 'fonts/*.otf', 'stopwords/*.txt']
