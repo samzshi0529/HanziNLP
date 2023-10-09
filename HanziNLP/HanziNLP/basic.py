@@ -37,13 +37,30 @@ def word_freq(text):
 # Define the path to the fonts directory
 FONTS_DIR = os.path.join(os.path.dirname(__file__), 'fonts')
 
-def list_fonts():
+def list_fonts(filter_text=None):
     """
-    List the names of all available fonts.
+    List the names of all available fonts, optionally filtered by a substring.
+
+    Parameters:
+    filter_text (str, optional): Substring to filter fonts by. Defaults to None, showing all fonts.
+
+    Returns:
+    list: A filtered list of font names.
     """
     font_files = os.listdir(FONTS_DIR)
-    font_names = [os.path.splitext(font)[0] for font in font_files if font.endswith(('.ttf', '.otf'))] # Checking for both ttf and otf
-    return font_names
+    # Extract font names from both .ttf and .otf files
+    font_names = [os.path.splitext(font)[0] for font in font_files if font.endswith(('.ttf', '.otf'))]
+
+    if filter_text:
+        # If filter_text is provided, filter fonts based on whether filter_text is in the font name
+        font_names = [font for font in font_names if filter_text.lower() in font.lower()]
+        
+    # Display font names in a user-friendly way
+    for i, font in enumerate(sorted(font_names), 1):
+        print(f"{i}. {font}")
+
+    # Return the filtered and sorted list of font names
+    return sorted(font_names)
 
 def get_font(font_name, show=True):
     """
