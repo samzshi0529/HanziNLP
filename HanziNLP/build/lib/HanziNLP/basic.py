@@ -4,16 +4,18 @@ import logging
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import os
+from collections import Counter
+from collections import defaultdict
 
 # Suppress informational messages from jieba
 logging.getLogger('jieba').setLevel(logging.WARNING)
 
-def count_chars(text):
+def char_freq(text):
     """Count the number of Chinese characters in a text."""
     count = len([char for char in text if '\u4e00' <= char <= '\u9fff'])
     return count
 
-def count_words(text):
+def word_freq(text):
     """
     Count the number of Chinese and English words in a text using word segmentation,
     and return segmented words.
@@ -58,7 +60,7 @@ def get_font_path(font_name, show=True):
     font_path = os.path.join(FONTS_DIR, font_file)
     if os.path.isfile(font_path):
         if show:
-            text = '你好，世界啊'
+            text = '你好，世界'
             prop = fm.FontProperties(fname=font_path, size=40)
             plt.text(0.5, 0.5, text, fontproperties=prop, ha='center', va='center')
             plt.axis('off')
@@ -148,4 +150,51 @@ def word_tokenize(text, stopwords=common_stopwords, text_only=False, include_num
     
     return processed_tokens
 
+def BoW(segmented_text_list):
+    """
+    Convert a list of segmented texts into a Bag of Words (BoW) representation.
 
+    Parameters:
+    segmented_text_list (list of str): A list of segmented texts.
+
+    Returns:
+    dict: A dictionary representing word frequencies.
+    """
+    word_frequencies = Counter()
+
+    for text in segmented_text_list:
+        # Using the word_freq function to get the count of each word in the text
+        # You might want to modify the word_freq function to return not just the count but also the words
+        words = list(jieba.cut(text))  # Assuming you've segmented the text using jieba.cut
+        word_frequencies.update(words)
+    
+    return dict(word_frequencies)
+    
+
+def ngrams(tokens, n=3):
+    """
+    Convert a list of tokens into n-grams and count their frequencies.
+
+    Parameters:
+    tokens (list): The input list of tokens.
+    n (int): The number for n-grams. Default is 2 (bigrams).
+
+    Returns:
+    dict: A dictionary with n-grams as keys and their frequencies as values.
+    """
+    if n <= 0:
+        raise ValueError("n should be greater than 0")
+
+    # Check if tokens is a list
+    if not isinstance(tokens, list):
+        raise TypeError("Input should be a list of tokens")
+
+    # Create n-grams
+    ngrams = [' '.join(tokens[i:i+n]) for i in range(len(tokens)-n+1)]
+    
+    # Count frequencies of each n-gram
+    freq_dist = defaultdict(int)
+    for ngram in ngrams:
+        freq_dist[ngram] += 1
+    
+    return dict(freq_dist)
