@@ -155,15 +155,46 @@ def sentence_segment(text):
     # Return the list of sentences
     return sentences
 
-
 def list_stopwords():
     """
-    List available stopword files.
+    List available stopword files with an interactive search feature.
 
     Returns:
-    list: A list of filenames in the stopwords directory.
+    None
     """
-    return os.listdir(STOPWORDS_DIR)
+    stopwords_files = os.listdir(STOPWORDS_DIR)
+    df = pd.DataFrame(sorted(stopwords_files), columns=['Stopword Files'])
+
+    text = widgets.Text(
+        value='',
+        placeholder='Type something',
+        description='Filter:',
+        disabled=False
+    )
+
+    button = widgets.Button(description="Confirm")
+    output = widgets.Output()
+
+    # Function to handle button click and filter table
+    def on_button_click(b):
+        with output:
+            clear_output(wait=True)
+            filter_text = text.value
+            if filter_text:
+                display_df = df[df['Stopword Files'].str.contains(filter_text, case=False, na=False)]
+                print(display_df)
+            else:
+                print(df)
+
+    button.on_click(on_button_click)
+
+    # Creating a horizontal box with the text and button widgets
+    hbox = widgets.HBox([text, button])
+
+    # Initial display of widgets and DataFrame
+    display(hbox, output)
+    with output:
+        print(df)  # Initial DataFrame output
     
 def load_stopwords(file_name):
     """
@@ -175,12 +206,13 @@ def load_stopwords(file_name):
 
 common_stopwords = load_stopwords('common_stopwords.txt')
 
-def word_tokenize(text, stopwords=common_stopwords, text_only=False, include_numbers=True):
+def word_tokenize(text, mode='precise', stopwords=common_stopwords, text_only=False, include_numbers=True):
     """
     Tokenize Chinese text and remove stopwords.
 
     Parameters:
     text (str): The input Chinese text.
+    mode (str): Tokenization mode ('all', 'precise', or 'search_engine'). Default is 'precise'.
     stopwords_files (list): A list of filenames containing stopwords. Default is ['common_stopwords.txt'].
     text_only (Boolean): Only tokenize English and Chinese texts if True. Default is False.
     include_numbers (Boolean): Whether to include numbers in the tokenized output. Default is True.
@@ -191,8 +223,18 @@ def word_tokenize(text, stopwords=common_stopwords, text_only=False, include_num
     stopwords_list = set()
     stopwords_list = stopwords_list.union(stopwords)
     
-    # Tokenize text
-    tokens = jieba.cut(text)
+    # Validate the mode parameter
+    valid_modes = ['all', 'precise', 'search_engine']
+    if mode not in valid_modes:
+        raise ValueError("Invalid mode. Choose from 'all', 'precise', or 'search_engine'.")
+
+    # Choose the tokenization function based on the mode
+    if mode == 'all':
+        tokens = jieba.cut(text, cut_all=True)
+    elif mode == 'precise':
+        tokens = jieba.cut(text, cut_all=False)
+    elif mode == 'search_engine':
+        tokens = jieba.cut_for_search(text)
 
     if text_only:
         # If text_only is True, retain only Chinese and English characters in tokens

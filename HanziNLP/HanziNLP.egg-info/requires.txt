@@ -7,7 +7,5 @@ gensim
 fasttext
 transformers
 torch
-
-[interactive]
 ipywidgets>=7.6.3
 IPython>=7.27.0
