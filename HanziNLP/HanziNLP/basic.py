@@ -642,17 +642,11 @@ def dashboard():
         description='',
     )
 
-    # Label for text input
-    text_label = widgets.HTML(
-        value="<b style='font-size: 15px;'>Text Input:</b>",
-        placeholder='',
-        description='',
-    )
-
     # Text input widget
     text_input = widgets.Textarea(
-        value='',
+        value='你好，世界',
         placeholder='Enter Text Here',
+        description='Text_input:',
         disabled=False,
         layout=widgets.Layout(height='30px', width='auto')
     )
@@ -663,11 +657,26 @@ def dashboard():
         layout=widgets.Layout(height='30px', width='auto')
     )
 
+    # Model name input
+    model_input = widgets.Text(
+        value='',
+        placeholder='Enter model name',
+        description='Model Name:',
+        disabled=False,
+        layout=widgets.Layout(height='30px', width='auto')
+    )
+
+    # Model confirm button
+    model_button = widgets.Button(
+        description="Confirm Model",
+        layout=widgets.Layout(height='30px', width='auto')
+    )
+
     # Text display area
     text_display = widgets.Textarea(
         value='This is the text you inputted',
         disabled=True,
-        layout=widgets.Layout(height='400px', width='auto')
+        layout=widgets.Layout(height='200px', width='auto')
     )
 
     # Table to display counts
@@ -675,39 +684,81 @@ def dashboard():
         header=dict(values=['Metric', 'Count']),
         cells=dict(values=[['Character Count', 'Word Count'], [0, 0]])
     )
-    count_table = go.FigureWidget([count_trace], layout={'height': 300, 'width': '500px'})
+    count_table = go.FigureWidget([count_trace], layout={'width': 300, 'margin': {'l': 0, 'r': 0, 't': 50, 'b': 0}, 'title': {'text': 'Character & Word Count', 'y':0.95, 'x':0.5, 'xanchor': 'center', 'yanchor': 'top'},
+                                      'title_font_size': 14})
 
     # Table to display top word frequencies
     freq_trace = go.Table(
         header=dict(values=['Token', 'Frequency']),
         cells=dict(values=[[], []])
     )
-    freq_table = go.FigureWidget([freq_trace], layout={'height': 300, 'width': '500px'})
+    freq_table = go.FigureWidget([freq_trace], layout={'width': 300, 'margin': {'l': 0, 'r': 0, 't': 50, 'b': 0}, 'title': {'text': 'Word Frequencies', 'y':0.95, 'x':0.5, 'xanchor': 'center', 'yanchor': 'top'},
+                                      'title_font_size': 14})
+
+    # Table to display sentiment analysis
+    sentiment_trace = go.Table(
+        header=dict(values=['Label', 'Probability']),
+        cells=dict(values=[[], []])
+    )
+    sentiment_table = go.FigureWidget([sentiment_trace], layout={'width': 300, 'margin': {'l': 0, 'r': 0, 't': 50, 'b': 0}, 'title': {'text': 'Sentiment Analysis', 'y':0.95, 'x':0.5, 'xanchor': 'center', 'yanchor': 'top'},
+                                      'title_font_size': 14})
 
     # Update function
-    def update_table(button):
-        text = text_input.value
+    def update_table(button=None):  # Allow calling without a button press
+        text = text_input.value if text_input.value.strip() != '' else '你好，世界'  # Use default text if input is empty
         char_count_value = char_freq(text)
         word_count_value = word_freq(text)
         count_table.data[0].cells.values = [['Character Count', 'Word Count'], [char_count_value, word_count_value]]
         
         # Tokenize and get frequencies
-        tokens = word_tokenize(text)
+        tokens = word_tokenize(text, text_only=True, include_numbers=False)
         token_freq = Counter(tokens)
-        top_tokens = token_freq.most_common(20)  # Get top 10 tokens
+        top_tokens = token_freq.most_common(20)  # Get top 20 tokens
         tokens, frequencies = zip(*top_tokens)
         freq_table.data[0].cells.values = [tokens, frequencies]
         
         # Update text display area
         text_display.value = f"This is the text you inputted:\n{text}"
+        
+        model_name = model_input.value if model_input.value else 'hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2'
+        # Ensure sentiment() returns a dictionary {label: probability}
+        sentiment_probs = sentiment(text, model_name, print_all=True)
+        
+        # Unpack labels and probabilities, rounding probabilities to 2 decimal places
+        labels, probabilities = zip(*[(label, round(prob, 5)) for label, prob in sentiment_probs.items()])
+        
+        sentiment_table.data[0].cells.values = [labels, probabilities]
+
+
+    # Update sentiment table function
+    def update_sentiment(button):
+        text = text_input.value
+        model_name = model_input.value if model_input.value else 'hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2'
+        
+        # Ensure sentiment() returns a dictionary {label: probability}
+        sentiment_probs = sentiment(text, model_name, print_all=True)
+        
+        # Unpack labels and probabilities, rounding probabilities to 2 decimal places
+        labels, probabilities = zip(*[(label, round(prob, 5)) for label, prob in sentiment_probs.items()])
+        
+        sentiment_table.data[0].cells.values = [labels, probabilities]
 
     # Set button click event handler
     button.on_click(update_table)
+    model_button.on_click(update_sentiment)
+
+    # Initial update without button press
+    update_table()
+    update_sentiment(None)  # Pass None because no button is pressed
 
     # Layout widgets
-    input_and_button = widgets.HBox([text_input, button], layout=widgets.Layout(align_items='center'))
-    tables = widgets.HBox([count_table, freq_table])
+    input_and_button = widgets.HBox([text_input, button, model_input, model_button])
+    
+    tables = widgets.HBox([count_table, sentiment_table, freq_table], 
+                          layout=widgets.Layout(justify_content='space-around', display = 'flex'))
     user_interface = widgets.VBox([input_and_button, text_display, tables])
     
     display(widgets.VBox([title, user_interface]))
+    
+
 
