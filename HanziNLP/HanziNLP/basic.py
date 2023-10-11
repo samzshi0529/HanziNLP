@@ -21,6 +21,7 @@ import fasttext.util
 from transformers import AutoTokenizer, BertModel, AutoModelForSequenceClassification
 from transformers import BertTokenizer, BertForSequenceClassification
 import torch
+import seaborn as sns
 
 # Suppress informational messages from jieba
 logging.getLogger('jieba').setLevel(logging.WARNING)
@@ -549,16 +550,19 @@ def print_topics(lda_model, num_words=10):
     for idx, topic in lda_model.print_topics(-1, num_words):
         print(f"Topic: {idx} \nWords: {topic}")
 
-def sentiment(text, model=''):
+def sentiment(text, model='hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2', print_all=True, show=False):
     """
     Perform sentiment analysis on the input text using the specified model.
 
     Parameters:
     text (str): The input text to be analyzed.
-    model_name (str): The name of the pre-trained model to use.
+    model (str): The name of the pre-trained model to use.
+    print_all (bool): Whether to print probabilities for all labels or only the label with the highest probability.
+    show (bool): Whether to plot a bar chart showing the probability distribution for each label.
 
     Returns:
-    dict: A dictionary containing the sentiment labels and their corresponding probabilities.
+    dict or tuple: A dictionary containing the sentiment labels and their corresponding probabilities if print_all is True,
+                   otherwise a tuple containing the label with the highest probability and its corresponding probability.
     """
     # Load tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(model)
@@ -577,5 +581,40 @@ def sentiment(text, model=''):
     # Create a dictionary to store the probabilities associated with each label
     sentiment_probs = {label: prob.item() for label, prob in zip(labels, probs[0])}
 
-    return sentiment_probs
+    if show:
+        # Set the aesthetic style of the plots
+        sns.set_style("whitegrid")
+
+        # Set the color palette
+        sns.set_palette("husl")
+
+        # Plot a horizontal bar chart
+        plt.figure(figsize=(5, 5))
+        ax = sns.barplot(x=list(sentiment_probs.values()), y=list(sentiment_probs.keys()))
+        plt.xlabel('Probability', fontsize=7)
+        plt.ylabel('Sentiment', fontsize=7)
+        plt.title('Sentiment Probability Distribution', fontsize=9)
+        plt.xticks(fontsize=8)
+        plt.yticks(fontsize=8)
+
+        # Hide the right, top, and bottom axes
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.spines['bottom'].set_visible(False)
+
+        # Remove x-axis grid lines
+        ax.xaxis.grid(False)
+
+        # Add data values on each bar
+        for index, value in enumerate(sentiment_probs.values()):
+            ax.text(x=value, y=index, s=f"{value:.2f}", va='center', fontsize=7)
+
+        plt.show()
+
+    if print_all:
+        return sentiment_probs
+    else:
+        # Find the label with the highest probability
+        max_label = max(sentiment_probs, key=sentiment_probs.get)
+        return max_label, sentiment_probs[max_label]
 

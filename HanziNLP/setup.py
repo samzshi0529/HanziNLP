@@ -20,7 +20,8 @@ setup(
         'transformers',
         'torch',
         'ipywidgets>=7.6.3',
-        'IPython>=7.27.0'
+        'IPython>=7.27.0',
+        'seaborn'
         # add other core dependencies as needed
     ],
     include_package_data=True,  # This includes all files in the package
