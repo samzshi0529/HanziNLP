@@ -700,7 +700,7 @@ def dashboard():
         header=dict(values=['Label', 'Probability']),
         cells=dict(values=[[], []])
     )
-    sentiment_table = go.FigureWidget([sentiment_trace], layout={'width': 300, 'margin': {'l': 0, 'r': 0, 't': 50, 'b': 0}, 'title': {'text': 'Sentiment Analysis', 'y':0.95, 'x':0.5, 'xanchor': 'center', 'yanchor': 'top'},
+    sentiment_table = go.FigureWidget([sentiment_trace], layout={'width': 300, 'margin': {'l': 0, 'r': 0, 't': 50, 'b': 0}, 'title': {'text': 'Text Classification', 'y':0.95, 'x':0.5, 'xanchor': 'center', 'yanchor': 'top'},
                                       'title_font_size': 14})
 
     # Update function
