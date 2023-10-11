@@ -18,7 +18,8 @@ from gensim.models import LdaModel
 from gensim.models import CoherenceModel
 import fasttext
 import fasttext.util
-from transformers import AutoTokenizer, BertModel
+from transformers import AutoTokenizer, BertModel, AutoModelForSequenceClassification
+from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 
 # Suppress informational messages from jieba
@@ -468,35 +469,26 @@ def Word2Vec(text, dimension=300):
     
     return embeddings
 
-def load_pretrained_model(model_name="bert-base-chinese"):
+def get_bert_embeddings(text, model="bert-base-chinese"):
     """
-    Load a pre-trained model and tokenizer based on the specified model name.
-
-    Parameters:
-    model_name (str): The name of the pre-trained model.
-
-    Returns:
-    tokenizer: The tokenizer associated with the pre-trained model.
-    model: The pre-trained model.
-    """
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = BertModel.from_pretrained(model_name)
-    return tokenizer, model
-
-def get_bert_embeddings(text, tokenizer, model):
-    """
-    Get BERT embeddings for the specified text.
+    Get BERT embeddings for the specified text using a pre-trained Chinese BERT model.
 
     Parameters:
     text (str): The input text.
-    tokenizer: The tokenizer associated with the pre-trained model.
-    model: The pre-trained model.
+    model_name (str): The name of the pre-trained Chinese BERT model to use. Default is "bert-base-chinese."
 
     Returns:
     sentence_embedding (list): The sentence embedding as a list of floats.
     tokens (list): The tokens associated with the sentence embedding.
     """
+    # Load the pre-trained Chinese BERT model and tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(model)
+    model = BertModel.from_pretrained(model)
+
+    # Tokenize the text and prepare it for the model
     inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
+    
+    # Make predictions using the model
     with torch.no_grad():
         outputs = model(**inputs)
 
@@ -556,3 +548,34 @@ def print_topics(lda_model, num_words=10):
     """
     for idx, topic in lda_model.print_topics(-1, num_words):
         print(f"Topic: {idx} \nWords: {topic}")
+
+def sentiment(text, model=''):
+    """
+    Perform sentiment analysis on the input text using the specified model.
+
+    Parameters:
+    text (str): The input text to be analyzed.
+    model_name (str): The name of the pre-trained model to use.
+
+    Returns:
+    dict: A dictionary containing the sentiment labels and their corresponding probabilities.
+    """
+    # Load tokenizer and model
+    tokenizer = AutoTokenizer.from_pretrained(model)
+    model = AutoModelForSequenceClassification.from_pretrained(model)
+
+    # Tokenize input text and obtain model output
+    inputs = tokenizer(text, return_tensors="pt")
+    outputs = model(**inputs)
+
+    # Get probabilities using softmax
+    probs = torch.nn.functional.softmax(outputs.logits, dim=-1)
+
+    # Get the list of labels from the model’s configuration
+    labels = model.config.id2label.values()
+
+    # Create a dictionary to store the probabilities associated with each label
+    sentiment_probs = {label: prob.item() for label, prob in zip(labels, probs[0])}
+
+    return sentiment_probs
+
