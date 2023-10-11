@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='HanziNLP',
-    version='0.1',
+    version='0.1.0',
     packages=find_packages(),
     author='Zhan Shi',
     author_email='samzshi@sina.com',
@@ -28,4 +28,6 @@ setup(
     package_data={
         'HanziNLP': ['fonts/*.ttf', 'fonts/*.otf', 'stopwords/*.txt']
     },
+    url='https://github.com/samzshi0529/HanziNLP',
+    keywords=['nlp', 'chinese', 'natural language processing', 'text analysis']
 )
