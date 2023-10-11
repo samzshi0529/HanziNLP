@@ -3,6 +3,7 @@ import jieba
 import re
 import logging
 import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 import matplotlib.font_manager as fm
 import os
 from collections import Counter
@@ -11,6 +12,7 @@ import ipywidgets as widgets
 import pandas as pd
 import numpy as np
 from IPython.display import display, clear_output
+import plotly.graph_objects as go
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import KeyedVectors
 from gensim import corpora
@@ -26,10 +28,24 @@ import seaborn as sns
 # Suppress informational messages from jieba
 logging.getLogger('jieba').setLevel(logging.WARNING)
 
-def char_freq(text):
-    """Count the number of Chinese characters in a text."""
-    count = len([char for char in text if '\u4e00' <= char <= '\u9fff'])
-    return count
+def char_freq(text, text_only=True):
+    """Count the number of characters in a text."""
+    chinese_chars = [char for char in text if '\u4e00' <= char <= '\u9fff']
+    chinese_count = len(chinese_chars)
+    
+    # Remove Chinese characters from text to leave behind English words and others
+    text_without_chinese = re.sub("[\u4e00-\u9fff]+", " ", text)
+    
+    if text_only:
+        # Count only alphanumeric English words
+        english_words = re.findall(r'\b\w+\b', text_without_chinese)
+        english_count = len(english_words)
+    else:
+        # Count all characters excluding Chinese characters
+        english_count = len(text_without_chinese)
+    
+    total_count = chinese_count + english_count
+    return total_count
 
 def word_freq(text):
     """
@@ -617,4 +633,81 @@ def sentiment(text, model='hw2942/bert-base-chinese-finetuning-financial-news-se
         # Find the label with the highest probability
         max_label = max(sentiment_probs, key=sentiment_probs.get)
         return max_label, sentiment_probs[max_label]
+
+def dashboard():
+    # Title
+    title = widgets.HTML(
+        value="<h1>HanziNLP Dashboard</h1>",
+        placeholder='',
+        description='',
+    )
+
+    # Label for text input
+    text_label = widgets.HTML(
+        value="<b style='font-size: 15px;'>Text Input:</b>",
+        placeholder='',
+        description='',
+    )
+
+    # Text input widget
+    text_input = widgets.Textarea(
+        value='',
+        placeholder='Enter Text Here',
+        disabled=False,
+        layout=widgets.Layout(height='30px', width='auto')
+    )
+
+    # Refresh button
+    button = widgets.Button(
+        description="Confirm",
+        layout=widgets.Layout(height='30px', width='auto')
+    )
+
+    # Text display area
+    text_display = widgets.Textarea(
+        value='This is the text you inputted',
+        disabled=True,
+        layout=widgets.Layout(height='400px', width='auto')
+    )
+
+    # Table to display counts
+    count_trace = go.Table(
+        header=dict(values=['Metric', 'Count']),
+        cells=dict(values=[['Character Count', 'Word Count'], [0, 0]])
+    )
+    count_table = go.FigureWidget([count_trace], layout={'height': 300, 'width': '500px'})
+
+    # Table to display top word frequencies
+    freq_trace = go.Table(
+        header=dict(values=['Token', 'Frequency']),
+        cells=dict(values=[[], []])
+    )
+    freq_table = go.FigureWidget([freq_trace], layout={'height': 300, 'width': '500px'})
+
+    # Update function
+    def update_table(button):
+        text = text_input.value
+        char_count_value = char_freq(text)
+        word_count_value = word_freq(text)
+        count_table.data[0].cells.values = [['Character Count', 'Word Count'], [char_count_value, word_count_value]]
+        
+        # Tokenize and get frequencies
+        tokens = word_tokenize(text)
+        token_freq = Counter(tokens)
+        top_tokens = token_freq.most_common(20)  # Get top 10 tokens
+        tokens, frequencies = zip(*top_tokens)
+        freq_table.data[0].cells.values = [tokens, frequencies]
+        
+        # Update text display area
+        text_display.value = f"This is the text you inputted:\n{text}"
+
+    # Set button click event handler
+    button.on_click(update_table)
+
+    # Layout widgets
+    input_and_button = widgets.HBox([text_input, button], layout=widgets.Layout(align_items='center'))
+    tables = widgets.HBox([count_table, freq_table])
+    user_interface = widgets.VBox([input_and_button, text_display, tables])
+    
+    display(widgets.VBox([title, user_interface]))
 

@@ -1,11 +1,12 @@
 Metadata-Version: 2.1
 Name: HanziNLP
-Version: 0.1
+Version: 0.1.0
 Summary: A NLP package specifically for Chinese
-Home-page: UNKNOWN
+Home-page: https://github.com/samzshi0529/HanziNLP
 Author: Zhan Shi
 Author-email: samzshi@sina.com
 License: MIT
+Keywords: nlp,chinese,natural language processing,text analysis
 Platform: UNKNOWN
 License-File: LICENSE
 

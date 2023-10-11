@@ -6,3 +6,4 @@ from .basic import text_similarity
 from .basic import get_bert_embeddings
 from .basic import lda_model, print_topics
 from .basic import sentiment
+from .basic import dashboard
