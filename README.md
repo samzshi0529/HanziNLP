@@ -4,7 +4,7 @@ An aggregate Natural Language Processing package specifically designed for Chine
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Installing & Usage](#installing-and-usage)
+- [Installing & Usage](#installing--usage)
 - [Character and Word Counting](#character-and-word-counting)
 - [Font Management](#font-management)
 - [Text Segmentation](#text-segmentation)
