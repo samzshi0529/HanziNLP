@@ -21,10 +21,8 @@ HanziNLP is a specialized NLP package tailored for handling Chinese text. It pro
 
 ## Installing and Usage
 
-### Code Example
 ```python
 pip install HanziNLP
-import HanziNLP as sz
 ```
 
 ## Character and Word Counting
@@ -34,7 +32,7 @@ import HanziNLP as sz
 - `word_freq`: Function to calculate the frequency of each word in a given text.
 ### Code Example
 ```python
-from hanzi_nlp import char_freq, word_freq
+from HanziNLP import char_freq, word_freq
 
 text = "你好, 世界!"
 char_count = char_freq(text)
