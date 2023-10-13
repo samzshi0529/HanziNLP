@@ -16,14 +16,22 @@ An aggregate Natural Language Processing package specifically designed for Chine
 - [Topic Modeling](#topic-modeling)
 - [Sentiment Analysis](#sentiment-analysis)
 
+## Developer
+
+Thanks for using HanziNLP from the developer 施展,Samuel Shi. For any improvement and more information about me, you can find via the following ways:
+
+- **Personal Email**: samzshi@sina.com
+- **Personal Webiste**: [https://www.samzshi.com/](https://www.samzshi.com/)
+- **Linkedin**: [www.linkedin.com/in/zhanshisamuel](www.linkedin.com/in/zhanshisamuel)
+
 ## Introduction
 
 Welcome to **HanziNLP** - your comprehensive toolkit for Natural Language Processing (NLP) with a special focus on Chinese text, while also accommodating English. Designed with user-friendliness in mind, HanziNLP offers a suite of intuitive tools that cater not only to tech-savvy individuals but also to those from non-technical backgrounds. From fundamental text preprocessing to sophisticated text analysis and modeling, our package ensures a smooth NLP journey for all users. Moreover, HanziNLP features an interactive dashboard, providing a dynamic overview and insights into various NLP functionalities, ensuring a visually engaging user experience.
 
 ### Related Links
 
-- **GitHub Repository**: Explore our code and contribute on [GitHub](https://github.com/samzshi0529/HanziNLP).
-- **PyPI Page**: Find us on [PyPI](https://libraries.io/pypi/HanziNLP) and explore more about how to integrate HanziNLP into your projects.
+- **GitHub Repository**: Explore my code and contribute on [GitHub](https://github.com/samzshi0529/HanziNLP).
+- **PyPI Page**: Find me on [PyPI](https://libraries.io/pypi/HanziNLP) and explore more about how to integrate HanziNLP into your projects.
 
 ### Installation and Usage
 
