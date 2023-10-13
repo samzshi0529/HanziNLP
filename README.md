@@ -18,7 +18,7 @@ An aggregate Natural Language Processing package specifically designed for Chine
 
 ## Developer
 
-To anyone using HanziNLP, big thanks to you from the developer 施展,Samuel Shi!🎉 For any improvement and more information about me, you can find via the following ways:
+To anyone using HanziNLP, big thanks to you from the developer 施展,Samuel Shi! 🎉🎉🎉 For any improvement and more information about me, you can find via the following ways:
 
 - **Personal Email**: samzshi@sina.com
 - **Personal Webiste**: [https://www.samzshi.com/](https://www.samzshi.com/)
@@ -26,7 +26,7 @@ To anyone using HanziNLP, big thanks to you from the developer 施展,Samuel Shi
 
 ## Introduction
 
-Welcome to **HanziNLP** - your comprehensive toolkit for Natural Language Processing (NLP) with a special focus on Chinese text, while also accommodating English. It Offers a suite of user-friendly tools for various NLP tasks and features an interactive dashboard for dynamic insights into NLP functionalities.
+Welcome to **HanziNLP** 🌟 - an easy and ready to use toolkit for Natural Language Processing (NLP) with a special focus on Chinese text, while also accommodating English. It Offers a suite of user-friendly tools for various NLP tasks and features an interactive dashboard for dynamic insights into NLP functionalities.
 
 From fundamental text preprocessing to sophisticated text analysis and modeling, our package ensures a smooth NLP journey for all users. Moreover, HanziNLP features an interactive dashboard, providing a dynamic overview and insights into various NLP functionalities.
 
