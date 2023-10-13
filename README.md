@@ -18,7 +18,7 @@ An aggregate Natural Language Processing package specifically designed for Chine
 
 ## Developer
 
-To anyone using HanziNLP, big thanks to you from the developer 施展,Samuel Shi. For any improvement and more information about me, you can find via the following ways:
+To anyone using HanziNLP, big thanks to you from the developer 施展,Samuel Shi!🎉 For any improvement and more information about me, you can find via the following ways:
 
 - **Personal Email**: samzshi@sina.com
 - **Personal Webiste**: [https://www.samzshi.com/](https://www.samzshi.com/)
