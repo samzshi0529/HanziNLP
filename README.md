@@ -18,7 +18,8 @@ An aggregate Natural Language Processing package specifically designed for Chine
 ## Introduction
 
 HanziNLP is a specialized NLP package tailored for handling Chinese text. It provides a easy-to-use suite of tools to perform various NLP tasks, from basic text preprocessing to advanced text analysis and modeling, and an interactive dashboard to dynamically glance at different aspects of NLP functions. 
-
+- Github Repository: [Github](https://github.com/samzshi0529/HanziNLP)
+  
 ## Installing and Usage
 
 ```python
@@ -48,20 +49,31 @@ Word Count: 2
 ```
 ## Font Management
 
+When visualizing Chinese text in Python environment, font is a vital resource which is often needed from manual importing. HanziNLP have built-in list of fonts for usage right away. You can use list_fonts() to see and filter all available fonts and use get_font() to retrieve a specific font path for visualization purposes. All built-in fonts are from Google fonts that are licensed under the Open Font License, meaning one can use them in your products & projects – print or digital, commercial or otherwise.
+
 ### list_fonts and get_font Functions
 - `list_fonts`: List all available fonts.
 - `get_font`: Retrieve a specific font for visualization purposes.
+
+#### list_fonts() example
 ```python
-from hanzi_nlp import list_fonts, get_font
+from HanziNLP import list_fonts
 
 # List all available fonts
-available_fonts = list_fonts()
-print(f"Available Fonts: {available_fonts}")
-
-# Get a specific font
-selected_font = get_font("Arial")
-print(f"Selected Font: {selected_font}")
+list_fonts()
 ```
+#### output
+![Example Image](README_PIC/list_fonts().png)
+
+#### get_font() example
+```python
+from HanziNLP import get_font
+
+font_path = get_font('ZCOOLXiaoWei-Regular')
+```
+#### output
+![Example Image](README_PIC/get_font.png)
+
 ## Text Segmentation
 
 ### sentence_segment and word_tokenize Functions
