@@ -26,7 +26,7 @@ To anyone using HanziNLP, big thanks to you from the developer 施展,Samuel Shi
 
 ## Introduction
 
-Welcome to **HanziNLP** - your comprehensive toolkit for Natural Language Processing (NLP) with a special focus on Chinese text, while also accommodating English. Designed with user-friendliness in mind, HanziNLP offers a suite of intuitive tools that cater not only to tech-savvy individuals but also to those from non-technical backgrounds. From fundamental text preprocessing to sophisticated text analysis and modeling, our package ensures a smooth NLP journey for all users. Moreover, HanziNLP features an interactive dashboard, providing a dynamic overview and insights into various NLP functionalities, ensuring a visually engaging user experience.
+Welcome to **HanziNLP** - your comprehensive toolkit for Natural Language Processing (NLP) with a special focus on Chinese text, while also accommodating English. It Offers a suite of user-friendly tools for various NLP tasks and features an interactive dashboard for dynamic insights into NLP functionalities.From fundamental text preprocessing to sophisticated text analysis and modeling, our package ensures a smooth NLP journey for all users. Moreover, HanziNLP features an interactive dashboard, providing a dynamic overview and insights into various NLP functionalities, ensuring a visually engaging user experience.
 
 ### Related Links
 
