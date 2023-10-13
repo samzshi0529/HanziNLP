@@ -1,9 +1,10 @@
 # HanziNLP
 
-A comprehensive Natural Language Processing package specifically designed for Chinese text.
+An aggregate Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization.
 
 ## Table of Contents
 - [Introduction](#introduction)
+- [Installing & Usage](#installing-and-usage)
 - [Character and Word Counting](#character-and-word-counting)
 - [Font Management](#font-management)
 - [Text Segmentation](#text-segmentation)
@@ -16,20 +17,53 @@ A comprehensive Natural Language Processing package specifically designed for Ch
 
 ## Introduction
 
-HanziNLP is a specialized NLP package tailored for handling Chinese text. It provides a suite of tools to perform various NLP tasks, from basic text preprocessing to advanced text analysis and modeling.
+HanziNLP is a specialized NLP package tailored for handling Chinese text. It provides a easy-to-use suite of tools to perform various NLP tasks, from basic text preprocessing to advanced text analysis and modeling, and an interactive dashboard to dynamically glance at different aspects of NLP functions. 
+
+## Installing & Usage
+
+### Code Example
+```python
+pip install HanziNLP
+import HanziNLP as sz
+```
 
 ## Character and Word Counting
 
 ### char_freq and word_freq Functions
 - `char_freq`: Function to calculate the frequency of each character in a given text.
 - `word_freq`: Function to calculate the frequency of each word in a given text.
+### Code Example
+```python
+from hanzi_nlp import char_freq, word_freq
 
+text = "你好, 世界!"
+char_count = char_freq(text)
+word_count = word_freq(text)
+
+print(f"Character Count: {char_count}")
+print(f"Word Count: {word_count}")
+```
+### Output Example
+```python
+Charater Count: 4
+Word Count: 2
+```
 ## Font Management
 
 ### list_fonts and get_font Functions
 - `list_fonts`: List all available fonts.
 - `get_font`: Retrieve a specific font for visualization purposes.
+```python
+from hanzi_nlp import list_fonts, get_font
 
+# List all available fonts
+available_fonts = list_fonts()
+print(f"Available Fonts: {available_fonts}")
+
+# Get a specific font
+selected_font = get_font("Arial")
+print(f"Selected Font: {selected_font}")
+```
 ## Text Segmentation
 
 ### sentence_segment and word_tokenize Functions
