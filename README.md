@@ -17,8 +17,11 @@ An aggregate Natural Language Processing package specifically designed for Chine
 
 ## Introduction
 
-HanziNLP is a specialized NLP package tailored for handling Chinese text. It provides a easy-to-use suite of tools to perform various NLP tasks, from basic text preprocessing to advanced text analysis and modeling, and an interactive dashboard to dynamically glance at different aspects of NLP functions. 
-- Github Repository: [Github](https://github.com/samzshi0529/HanziNLP)
+HanziNLP is a specialized NLP package tailored for handling Chinese text (English allowed). It provides a easy-to-use suite of tools which is appealing even to non-tech background to perform various NLP tasks, from basic text preprocessing to advanced text analysis and modeling, and an interactive dashboard to dynamically glance at different aspects of NLP functions. 
+
+### Related links
+- Github Repository: [https://github.com/samzshi0529/HanziNLP](https://github.com/samzshi0529/HanziNLP)
+- Pypl Page: [https://libraries.io/pypi/HanziNLP](https://libraries.io/pypi/HanziNLP)
   
 ## Installing and Usage
 
