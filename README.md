@@ -5,7 +5,7 @@ An aggregate Natural Language Processing package specifically designed for Chine
 ## Table of Contents
 - [Introduction](#introduction)
   - [Related Links](#related-links)
-- [Installing and Usage](#installing-and-usage)
+  - [Installing and Usage](#installing-and-usage)
 - [Character and Word Counting](#character-and-word-counting)
 - [Font Management](#font-management)
 - [Text Segmentation](#text-segmentation)
@@ -24,7 +24,7 @@ HanziNLP is a specialized NLP package tailored for handling Chinese text (Englis
 - Github Repository: [https://github.com/samzshi0529/HanziNLP](https://github.com/samzshi0529/HanziNLP)
 - Pypl Page: [https://libraries.io/pypi/HanziNLP](https://libraries.io/pypi/HanziNLP)
   
-## Installing and Usage
+### Installing and Usage
 
 ```python
 pip install HanziNLP
