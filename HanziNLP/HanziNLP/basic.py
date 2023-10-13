@@ -808,7 +808,7 @@ def dashboard():
         text_display.value = f"This is the text you inputted:\n{text}"
         
         # Update tokens display area
-        tokens = word_tokenize(text, stopwords=stopwords_dropdown.value, text_only=text_only_checkbox.value, include_numbers=include_numbers_checkbox.value)
+        tokens = word_tokenize(text, mode=mode_dropdown.value, stopwords=stopwords_dropdown.value, text_only=text_only_checkbox.value, include_numbers=include_numbers_checkbox.value)
         tokens_display.value = f"These are the tokens after tokenization:\n{' '.join(tokens)}"
         
         model_name = model_input.value if model_input.value else 'hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2'
