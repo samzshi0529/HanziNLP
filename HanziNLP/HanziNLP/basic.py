@@ -222,24 +222,31 @@ def load_stopwords(file_name):
         stopwords = f.read().splitlines()
     return set(stopwords)
 
-common_stopwords = load_stopwords('common_stopwords.txt')
-
-def word_tokenize(text, mode='precise', stopwords=common_stopwords, text_only=False, include_numbers=True):
+def word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, 
+                  include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False):
     """
     Tokenize Chinese text and remove stopwords.
 
     Parameters:
     text (str): The input Chinese text.
     mode (str): Tokenization mode ('all', 'precise', or 'search_engine'). Default is 'precise'.
-    stopwords_files (list): A list of filenames containing stopwords. Default is ['common_stopwords.txt'].
+    stopwords (set): A set of stopwords.
     text_only (Boolean): Only tokenize English and Chinese texts if True. Default is False.
     include_numbers (Boolean): Whether to include numbers in the tokenized output. Default is True.
+    custom_stopwords (list, optional): A list of custom stopwords to remove. Default is None.
+    exclude_default_stopwords (bool, optional): Whether to exclude default stopwords. Default is False.
 
     Returns:
     list: A list of tokens after removing stopwords.
     """
+    # Load default stopwords
     stopwords_list = set()
-    stopwords_list = stopwords_list.union(stopwords)
+    if not exclude_default_stopwords:
+        stopwords_list = stopwords_list.union(load_stopwords(stopwords))
+    
+    # Add custom stopwords if provided
+    if custom_stopwords:
+        stopwords_list = stopwords_list.union(set(custom_stopwords))
     
     # Validate the mode parameter
     valid_modes = ['all', 'precise', 'search_engine']
@@ -254,14 +261,16 @@ def word_tokenize(text, mode='precise', stopwords=common_stopwords, text_only=Fa
     elif mode == 'search_engine':
         tokens = jieba.cut_for_search(text)
 
+    # Define regex patterns
     if text_only:
-        # If text_only is True, retain only Chinese and English characters in tokens
-        # This regex pattern matches Chinese characters, English words, and optionally, numbers based on include_numbers
-        pattern_str = r'[\u4e00-\u9fff\w]+' if include_numbers else r'[\u4e00-\u9fffA-Za-z_]+'
-        pattern = re.compile(pattern_str)
+        pattern_str = r'[\u4e00-\u9fffA-Za-z_]+' if not include_numbers else r'[\u4e00-\u9fff\w]+'
+    else:
+        pattern_str = r'.+' if include_numbers else r'[^\d]+'
 
-        # Use the regex pattern to filter the tokens
-        tokens = [token for token in tokens if pattern.fullmatch(token)]
+    pattern = re.compile(pattern_str)
+
+    # Use the regex pattern to filter the tokens
+    tokens = [token for token in tokens if pattern.fullmatch(token)]
 
     # Remove stopwords
     processed_tokens = [token for token in tokens if token not in stopwords_list]
@@ -317,16 +326,17 @@ def ngrams(tokens, n=3):
     
     return dict(freq_dist)
 
-def TF_IDF(text_list, max_features=None):
+def TF_IDF(text_list, max_features=None, output_format='sparse'):
     """
     Transform a list of texts into their TF-IDF representation using scikit-learn's TfidfVectorizer.
 
     Parameters:
     text_list (list of str): A list of texts to be transformed.
     max_features (int, optional): Maximum number of features (terms) to be extracted. Defaults to None (all features).
+    output_format (str, optional): Format of the output matrix ('sparse', 'dense', or 'dataframe'). Defaults to 'sparse'.
 
     Returns:
-    sparse_matrix: A sparse matrix of shape (n_samples, n_features).
+    matrix: TF-IDF matrix in the specified format.
     feature_names: List of feature names.
     """
 
@@ -339,7 +349,15 @@ def TF_IDF(text_list, max_features=None):
     # Get the feature names
     feature_names = vectorizer.get_feature_names_out()
 
-    return tfidf_matrix, feature_names
+    # Convert the sparse matrix to the desired format
+    if output_format == 'dense':
+        return tfidf_matrix.toarray(), feature_names
+    elif output_format == 'dataframe':
+        return pd.DataFrame(tfidf_matrix.toarray(), columns=feature_names), feature_names
+    elif output_format == 'sparse':
+        return tfidf_matrix, feature_names
+    else:
+        raise ValueError("Invalid output_format. Choose from 'sparse', 'dense', or 'dataframe'.")
 
 def TT_matrix(tokenized_texts, window_size=1):
     """
@@ -635,6 +653,23 @@ def sentiment(text, model='hw2942/bert-base-chinese-finetuning-financial-news-se
         return max_label, sentiment_probs[max_label]
 
 def dashboard():
+    # Instruction
+    instructions = widgets.HTML(
+        value="<p><strong>Welcome to the HanziNLP Dashboard! Here are some instructions for you to start smoothly:</strong></p>"
+            "<ul>"
+            "<li><strong>Analyze Text:</strong> Enter your text into the 'Text Input' box, adjust settings as needed, "
+            "and click 'Confirm' to view various text statistics, such as word count, character count, and sentence count.</li>"
+            "<li><strong>Classification Model:</strong> Optionally, specify a classification model from Hugging Face. "
+            "If left blank, the default model, 'uer/roberta-base-finetuned-chinanews-chinese', will be used. Learn more about this model on "
+            "<a href='https://huggingface.co/uer/roberta-base-finetuned-chinanews-chinese' target='_blank'>Hugging Face</a>.</li>"
+            "<li><strong>Tokenization Methods:</strong> Adjust tokenization settings as needed. The HanziNLP tokenization algorithm, "
+            "integrated from Jieba for Chinese text, allows you to select the 'Jieba Mode' parameter (default is 'precise'). "
+            "Several built-in stopwords are available for selection from the dropdown list. The tokens and their respective frequencies will be displayed below.</li>"
+            "</ul>",
+        placeholder='',
+        description='',
+    )
+
     # Title
     title = widgets.HTML(
         value="<h1>HanziNLP Dashboard</h1>",
@@ -646,43 +681,90 @@ def dashboard():
     text_input = widgets.Textarea(
         value='你好，世界',
         placeholder='Enter Text Here',
-        description='Text_input:',
+        description='Text Input:',
         disabled=False,
-        layout=widgets.Layout(height='30px', width='auto')
+        layout=widgets.Layout(height='30px', width='300px')
     )
 
     # Refresh button
     button = widgets.Button(
         description="Confirm",
-        layout=widgets.Layout(height='30px', width='auto')
+        layout=widgets.Layout(height='30px', width='100px')
     )
 
     # Model name input
     model_input = widgets.Text(
         value='',
-        placeholder='Enter model name',
+        placeholder='Enter Classification model name',
         description='Model Name:',
         disabled=False,
-        layout=widgets.Layout(height='30px', width='auto')
+        layout=widgets.Layout(height='30px', width='300px')
     )
 
     # Model confirm button
     model_button = widgets.Button(
-        description="Confirm Model",
-        layout=widgets.Layout(height='30px', width='auto')
+        description="Confirm",
+        layout=widgets.Layout(height='30px', width='100px')
+    )
+
+    # Mode selection dropdown
+    mode_dropdown = widgets.Dropdown(
+    options=['precise', 'all', 'search_engine'],  # Replace with actual mode options
+    value='precise',  # Replace with default mode
+    description='Jieba Mode:',
+    disabled=False,
+    layout=widgets.Layout(width='300px')
+)
+
+    # Checkbox for text_only parameter
+    text_only_checkbox = widgets.Checkbox(
+        value=False,
+        description='Text Only',
+        disabled=False,
+        indent=False,
+        layout=widgets.Layout(height='30px', width='100px')
+    )
+
+    # Checkbox for include_numbers parameter
+    include_numbers_checkbox = widgets.Checkbox(
+        value=True,
+        description='Include Numbers',
+        disabled=False,
+        indent=False,
+        layout=widgets.Layout(height='30px', width='200px')
+    )
+
+    # Get stopwords files
+    stopwords_files = os.listdir(STOPWORDS_DIR)
+    df = pd.DataFrame(sorted(stopwords_files), columns=['Stopword Files'])
+    
+    # Stopwords selection dropdown
+    stopwords_dropdown = widgets.Dropdown(
+        options=stopwords_files,
+        value=stopwords_files[0] if stopwords_files else None,  # default value
+        description='Stopwords:',
+        disabled=False,
+        layout=widgets.Layout(width='300px')
     )
 
     # Text display area
     text_display = widgets.Textarea(
         value='This is the text you inputted',
         disabled=True,
-        layout=widgets.Layout(height='200px', width='auto')
+        layout=widgets.Layout(height='150px', width='auto')
+    )
+
+    # Text display area for tokens
+    tokens_display = widgets.Textarea(
+        value='Tokens will be displayed here',
+        disabled=True,
+        layout=widgets.Layout(height='150px', width='auto')
     )
 
     # Table to display counts
     count_trace = go.Table(
         header=dict(values=['Metric', 'Count']),
-        cells=dict(values=[['Character Count', 'Word Count'], [0, 0]])
+        cells=dict(values=[['Character Count', 'Word Count', 'Sentence Count'], [0, 0, 0]])
     )
     count_table = go.FigureWidget([count_trace], layout={'width': 300, 'margin': {'l': 0, 'r': 0, 't': 50, 'b': 0}, 'title': {'text': 'Character & Word Count', 'y':0.95, 'x':0.5, 'xanchor': 'center', 'yanchor': 'top'},
                                       'title_font_size': 14})
@@ -708,10 +790,15 @@ def dashboard():
         text = text_input.value if text_input.value.strip() != '' else '你好，世界'  # Use default text if input is empty
         char_count_value = char_freq(text)
         word_count_value = word_freq(text)
-        count_table.data[0].cells.values = [['Character Count', 'Word Count'], [char_count_value, word_count_value]]
+        # Segment sentences and count them
+        sentences = sentence_segment(text)
+        sentence_count_value = len(sentences)
         
+        count_table.data[0].cells.values = [['Character Count', 'Word Count', 'Sentence Count'], 
+                                            [char_count_value, word_count_value, sentence_count_value]]
+
         # Tokenize and get frequencies
-        tokens = word_tokenize(text, text_only=True, include_numbers=False)
+        tokens = word_tokenize(text, mode=mode_dropdown.value, stopwords=stopwords_dropdown.value, text_only=text_only_checkbox.value, include_numbers=include_numbers_checkbox.value)
         token_freq = Counter(tokens)
         top_tokens = token_freq.most_common(20)  # Get top 20 tokens
         tokens, frequencies = zip(*top_tokens)
@@ -719,6 +806,10 @@ def dashboard():
         
         # Update text display area
         text_display.value = f"This is the text you inputted:\n{text}"
+        
+        # Update tokens display area
+        tokens = word_tokenize(text, stopwords=stopwords_dropdown.value, text_only=text_only_checkbox.value, include_numbers=include_numbers_checkbox.value)
+        tokens_display.value = f"These are the tokens after tokenization:\n{' '.join(tokens)}"
         
         model_name = model_input.value if model_input.value else 'hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2'
         # Ensure sentiment() returns a dictionary {label: probability}
@@ -747,18 +838,27 @@ def dashboard():
     button.on_click(update_table)
     model_button.on_click(update_sentiment)
 
+    # Set checkbox change event handlers
+    mode_dropdown.observe(update_table, names='value')
+    stopwords_dropdown.observe(update_table, names='value')
+    text_only_checkbox.observe(update_table, names='value')
+    include_numbers_checkbox.observe(update_table, names='value')
+
     # Initial update without button press
     update_table()
     update_sentiment(None)  # Pass None because no button is pressed
 
     # Layout widgets
-    input_and_button = widgets.HBox([text_input, button, model_input, model_button])
-    
+    checkboxes = widgets.HBox([text_only_checkbox, include_numbers_checkbox])
+    options_and_checkboxes = widgets.HBox([mode_dropdown, stopwords_dropdown, checkboxes], layout=widgets.Layout(width='100%'))
+    input_and_button = widgets.HBox([text_input, button])
+    classification = widgets.HBox([model_input, model_button])
+
     tables = widgets.HBox([count_table, sentiment_table, freq_table], 
-                          layout=widgets.Layout(justify_content='space-around', display = 'flex'))
-    user_interface = widgets.VBox([input_and_button, text_display, tables])
-    
-    display(widgets.VBox([title, user_interface]))
-    
+                        layout=widgets.Layout(justify_content='space-around', display='flex'))
+    user_interface = widgets.VBox([input_and_button, classification, options_and_checkboxes, text_display, tokens_display, tables])
+
+    # Display everything
+    display(widgets.VBox([title, instructions, user_interface]))
 
 
