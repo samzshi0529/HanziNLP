@@ -35,7 +35,7 @@ Welcome to **HanziNLP** 🌟 - an ready-to-use toolkit for Natural Language Proc
 
 ### Installation and Usage
 
-Getting started with HanziNLP is as simple as executing a single command! Install the package using pip and embark on your NLP adventures with Chinese and English text:
+Getting started with HanziNLP is as simple as executing a single command!
 
 ```python
 pip install HanziNLP
