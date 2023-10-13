@@ -4,7 +4,7 @@ An aggregate Natural Language Processing package specifically designed for Chine
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Installing & Usage](#installing--usage)
+- [Installing and Usage](#installing-and-usage)
 - [Character and Word Counting](#character-and-word-counting)
 - [Font Management](#font-management)
 - [Text Segmentation](#text-segmentation)
@@ -19,7 +19,7 @@ An aggregate Natural Language Processing package specifically designed for Chine
 
 HanziNLP is a specialized NLP package tailored for handling Chinese text. It provides a easy-to-use suite of tools to perform various NLP tasks, from basic text preprocessing to advanced text analysis and modeling, and an interactive dashboard to dynamically glance at different aspects of NLP functions. 
 
-## Installing & Usage
+## Installing and Usage
 
 ### Code Example
 ```python
