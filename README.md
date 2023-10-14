@@ -167,6 +167,255 @@ plt.show()
 #### 输出
 ![示例图片](README_PIC/wordcloud.png)
 
+## 4. 文本分段
+文本分段是任何NLP任务中的一个关键步骤。一般的步骤是分段句子，去除停用词，并分别对每个句子进行分词。下面介绍了详细的说明。
+
+### 4.1 停用词管理
+为了在中文文本中去除停用词，该包内置了常见的停用词列表，包括以下几个：（部分停用词来自[stopwords](https://github.com/goto456/stopwords/)）
+
+| 停用词列表 | 文件名 |
+|----------|----------|
+| 中文停用词表 | cn_stopwords.txt |
+| 哈工大停用词表 | hit_stopwords.txt |
+| 百度停用词表 | baidu_stopwords.txt |
+| 四川大学机器智能实验室停用词表 | scu_stopwords.txt |
+| 常用停用词表 | common_stopwords.txt |
+
+#### list_stopwords 和 load_stopwords 函数
+- `list_stopwords()`: 列出所有可用的停用词。
+- `load_stopwords(file_name)`: 从指定的文件加载停用词到一个词列表。然后，您可以查看并在后续使用中使用这些停用词。
+
+##### list_stopwords 示例
+```python
+from HanziNLP import list_stopwords
+
+list_stopwords()
+```
+##### 输出 
+![示例图片](README_PIC/list_stopwords.png)
+
+##### load_stopwords 示例
+```python
+from HanziNLP import load_stopwords
+
+stopwords = load_stopwords('common_stopwords.txt') # 在这里输入txt文件名
+```
+##### 输出 
+```python
+{'然而',
+ 'whoever',
+ '只限',
+ '的确',
+ '要不然',
+ 'each',
+ '仍旧',
+ '这么点儿',
+ '冒',
+ '如果',
+ '比及',
+ '以期',
+ '犹自'.....
+}
+```
+### 4.2 句子分段
+此功能将整个文档或段落分段成句子。支持中文和英文文本。
+- `sentence_segment(text)`: 将输入文本分段成句子。
+
+#### sentence_segment 示例：此示例故意选择一个难以分割的句子。
+```python
+from HanziNLP import sentence_segment
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+sentence_segment(sample_sentence)
+```
+#### 输出 
+```python
+['hello world!', 'This is Sam.', '。', '除非你不说。', '我今天就会很开心,hello .', 'you。']
+```
+
+### 4.3 词语标记
+作为预处理文本用于NLP任务的最重要步骤之一，`word_tokenize()` 函数提供了一种直接将原始中文文本转换为标记的方法。
+
+- **函数**：`word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)`
+- **目的**：将输入文本标记为词，同时提供有效管理停用词的选项。
+  
+#### 参数：
+- `text` (str): 输入的中文文本。
+- `mode` (str, 可选): 标记模式，可从 'all', 'precise' 或 'search_engine' 中选择。默认为 'precise'。
+- `stopwords` (str, 可选): 指示要使用的停用词文件的文件名字符串。默认为 'common_stopwords.txt'。
+- `text_only` (bool, 可选): 如果为 True，则仅标记英文和中文文本。默认为 False。
+- `include_numbers` (bool, 可选): 如果为 True，则在标记的输出中包含数字。默认为 True。
+- `custom_stopwords` (str 列表, 可选): 要删除的自定义停用词列表。默认为 None。
+- `exclude_default_stopwords` (bool, 可选): 如果为 True，则排除默认的停用词。默认为 False。
+
+#### 返回：
+- `list`: 根据指定的参数删除停用词后的标记列表。
+
+#### 示例 1：
+```python
+from HanziNLP import word_tokenize
+ 
+sample = '除非你不说，我今天就会很开心,hello you#$@#@*' # 一个故意用于标记化的困难文本
+token = sz.word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt', text_only=False, 
+                  include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)
+token
+```
+#### 输出 
+```python
+['不', '说', '，', '会', '很', '开心', ',', '#', '$', '@', '#', '@', '*']
+```
+#### 示例 2：将 text_only 设置为 True 并将 custom_stopwords 设置为 ['开心']
+```python
+from HanziNLP import word_tokenize
+
+sample = '除非你不说，我今天就会很开心,hello you#$@#@*'# 一个故意用于标记化的困难文本
+token = sz.word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt', text_only=True, 
+                  include_numbers=True, custom_stopwords=['开心'], exclude_default_stopwords=False)
+token
+```
+#### 输出：已删除特殊字符和单词 '开心'
+```python
+['不', '说', '会', '很']
+```
+## 5. 文本表示
+构建文本特征图是各种机器学习或深度学习任务的起点。HanziNLP已整合了可以轻松实现的常见特征图方法。
+
+### 5.1 BoW（词袋模型）
+
+- **函数**：`BoW(segmented_text_list)`
+- **目的**：从一系列分段文本中生成词袋模型表示。
+- **参数**：
+  - `segmented_text_list` (str 列表)：包含分段文本的列表。
+- **返回**： 
+  - `dict`：表示词频的字典。
+
+#### 示例
+```python
+from HanziNLP import word_tokenize, BoW
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+token = word_tokenize(sample_sentence, text_only = True)
+bow = BoW(token)
+bow
+```
+#### 输出 
+```python
+{'hello': 2, 'world': 1, 'This': 1, 'Sam': 1, '说': 1, '今天': 1, '会': 1, '开心': 1}
+```
+
+### 5.2 ngrams
+
+- **函数**：`ngrams(tokens, n=3)`
+- **目的**：从标记列表中创建并计算n-grams的频率。
+- **参数**：
+  - `tokens` (列表)：标记列表。
+  - `n` (int, 可选)：n-grams的数字。默认为3（trigrams）。
+- **返回**： 
+  - `dict`：以n-grams为键，其频率为值的字典。
+
+#### 示例
+```python
+from HanziNLP import word_tokenize, ngrams
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+token = word_tokenize(sample_sentence, text_only = True)
+ngram = ngrams(token, n =3)
+ngram
+```
+#### 输出 
+```python
+{'hello world This': 1,
+ 'world This Sam': 1,
+ 'This Sam 说': 1,
+ 'Sam 说 今天': 1,
+ '说 今天 会': 1,
+ '今天 会 开心': 1,
+ '会 开心 hello': 1}
+```
+
+### 5.3 TF_IDF（词频-逆文档频率）
+
+- **函数**：`TF_IDF(text_list, max_features=None, output_format='sparse')`
+- **目的**：将文本列表转换为TF-IDF表示。
+- **参数**：
+  - `text_list` (str 列表)：要转换的标记列表。
+  - `max_features` (int, 可选)：要提取的最大特征（术语）数量。默认为None（所有特征）。
+  - `output_format` (str, 可选)：输出矩阵的格式（'sparse'，'dense' 或 'dataframe'）。默认为'sparse'。
+- **返回**： 
+  - `matrix`：指定格式的TF-IDF矩阵。
+  - `feature_names`：特征名称列表。
+
+#### 示例
+```python
+from HanziNLP import word_tokenize, TF_IDF
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+token = word_tokenize(sample_sentence, text_only = True)
+tfidf_matrix, feature_names = sz.TF_IDF(token, output_format = 'dataframe')
+tfidf_matrix
+```
+#### 输出 
+![示例图片](README_PIC/TFIDF.png)
+
+### 5.4 TT_matrix（术语-术语矩阵）
+
+- **函数**：`TT_matrix(tokenized_texts, window_size=1)`
+- **目的**：从标记文本列表生成术语-术语矩阵，表示指定窗口内的术语共现。
+- **参数**：
+  - `tokenized_texts` (str 列表的列表)：标记文本的列表。
+  - `window_size` (int)：共现的窗口大小。默认为1。
+- **返回**： 
+  - `np.array`：一个方阵，其中条目（i，j）是术语i和术语j之间的共现。
+  - `index_to_term`：从索引到术语的字典。
+
+#### 示例
+```python
+from HanziNLP import word_tokenize, TT_matrix
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+token = word_tokenize(sample_sentence, text_only = True)
+matrix, index_to_term = TT_matrix(token, window_size = 1)
+matrix
+```
+#### 输出 
+``` python
+array([[0., 4., 4., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [4., 0., 0., 0., 0., 0., 0., 2., 2., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [4., 0., 4., 4., 0., 2., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 4., 0., 2., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 2., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 2., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 2., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        2.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2.,
+        0.]])
+```
+
+
 
 </details>
 
