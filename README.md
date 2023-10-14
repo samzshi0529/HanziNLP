@@ -558,7 +558,7 @@ Words: 0.375*"说" + 0.063*"hello" + 0.063*"." + 0.063*"!" + 0.063*"Sam" + 0.063
 ```
 
 ## 9. Sentiment Analysis
-Sentiment Analysis is common in NLP tasks when sentiment of text could contribute to analysis in further research. 
+Sentiment Analysis is common in NLP tasks when sentiment of text could contribute to analysis in further research. While there are many ways to do sentiment analysis like using a sentiment dictionary, HanziNLP integrate the function to allow easily using pretrained BERT models or other language models on Huggin Face for text classification. 
 
 ### sentiment Function
 
