@@ -303,12 +303,24 @@ ngram
 - **Function**: `TF_IDF(text_list, max_features=None, output_format='sparse')`
 - **Purpose**: Transform a list of texts into a TF-IDF representation.
 - **Parameters**:
-  - `text_list` (list of str): A list of texts to be transformed.
+  - `text_list` (list of str): A list of tokens to be transformed.
   - `max_features` (int, optional): Maximum number of features (terms) to be extracted. Defaults to None (all features).
   - `output_format` (str, optional): Format of the output matrix ('sparse', 'dense', or 'dataframe'). Defaults to 'sparse'.
 - **Returns**: 
   - `matrix`: TF-IDF matrix in the specified format.
   - `feature_names`: List of feature names.
+
+#### example
+```python
+from HanziNLP import word_tokenize, TF_IDF
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+token = word_tokenize(sample_sentence, text_only = True)
+tfidf_matrix, feature_names = sz.TF_IDF(token, output_format = 'dataframe')
+tfidf_matrix
+```
+#### output 
+![Example Image](README_PIC/TFIDF.png)
 
 ### 5.4 TT_matrix (Term-Term Matrix)
 
@@ -321,6 +333,52 @@ ngram
   - `np.array`: A square matrix where entry (i, j) is the co-occurrence between term i and term j.
   - `index_to_term`: A dictionary mapping from index to term.
 
+#### example
+```python
+from HanziNLP import word_tokenize, TT_matrix
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+token = word_tokenize(sample_sentence, text_only = True)
+matrix, index_to_term = TT_matrix(token, window_size = 1)
+matrix
+```
+#### output 
+``` python
+array([[0., 4., 4., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [4., 0., 0., 0., 0., 0., 0., 2., 2., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [4., 0., 4., 4., 0., 2., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 4., 0., 2., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 2., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 2., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 2., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0., 0., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 2., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2., 0., 0.,
+        0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        2.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 2.,
+        0.]])
+```
 
 ## 6. Text Similarity
 
