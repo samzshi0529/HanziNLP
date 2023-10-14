@@ -2,15 +2,15 @@
 
 一个**用户友好**且**易于使用**的自然语言处理包，专为中文文本分析、建模和可视化而设计。HanziNLP中的所有功能都支持中文文本，并且非常适用于中文文本分析！
 
-
+<detail>
 <summary>🇨🇳 Chinese Version (点击查看中文版本)</summary>
+<detail>
   
 # HanziNLP
 
 An **user-friendly** and **easy-to-use** Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization. All functions in HanziNLP supports Chinese text and works well for Chinese text!
 
-<details>
-<summary> English Version (点击查看中文版本)</summary>
+<summary> English Version</summary>
 
 ## Table of Contents
 - [1. Quick Start](#1-quick-start)
