@@ -128,12 +128,15 @@ plt.show()
 Word Tokenization is a vital step in any NLP tasks. The general step is to segment the sentences, remove stopwords, and tokenize each sentences separately. The detailed instructions are introduced below. 
 
 ### Stopword Management
-To remove stopwords in Chinese text, the package have built-in common stopwords lists include the following ones:
-| Header 1 | Header 2 | Header 3 |
-|----------|----------|----------|
-| Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 |
-| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
-| Row 3, Col 1 | Row 3, Col 2 | Row 3, Col 3 |
+To remove stopwords in Chinese text, the package have built-in common stopwords lists include the following ones: (Some stopwords are from [stopwords](https://github.com/goto456/stopwords/)
+
+| Stopword List | File Name |
+|----------|----------|
+| 中文停用词表 | cn_stopwords.txt |
+| 哈工大停用词表 | hit_stopwords.txt |
+| 百度停用词表 | baidu_stopwords.txt |
+| 四川大学机器智能实验室停用词表 | scu_stopwords.txt |
+| 常用停用词表 | common_stopwords.txt |
 
 #### list_stopwords and load_stopwords Functions
 - `list_stopwords`: List all available stopwords.
