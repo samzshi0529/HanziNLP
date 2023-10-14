@@ -566,7 +566,7 @@ Sentiment Analysis is common in NLP tasks when sentiment of text could contribut
 - **Purpose**: Execute sentiment analysis on the input text utilizing the specified pre-trained model and optionally visualize the probability distribution across sentiment labels.
 - **Parameters**:
   - `text` (str): The input text subject to sentiment analysis.
-  - `model` (str): The identifier of the pre-trained model to be used. Default is 'hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2'.
+  - `model` (str): The identifier of the pre-trained model to be used. You can use any model on **Hugging Face** and copy the model name here to use it to classify the text. Default is 'hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2'.
   - `print_all` (bool): Indicator whether to print probabilities for all labels or only the label with the highest probability. Default is True.
   - `show` (bool): Indicator whether to display a bar chart showing the probability distribution across labels. Default is False.
 - **Returns**: 
@@ -587,7 +587,7 @@ If `show` is set to True, a bar chart visualizing the probability distribution a
 from HanziNLP import sentiment
 
 text = "这个小兄弟弹的太好了"
-sentiment= sentiment(text, model = 'touch20032003/xuyuan-trial-sentiment-bert-chinese', show = True)
+sentiment= sentiment(text, model = 'touch20032003/xuyuan-trial-sentiment-bert-chinese', show = True) # Enter any pretrained classification model on Hugging Face
 print('sentiment =' , sentiment)
 ```
 #### output
