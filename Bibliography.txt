@@ -1,0 +1,29 @@
+Default pretrained model in Dashboard():
+@article{liu2019roberta,
+  title={Roberta: A robustly optimized bert pretraining approach},
+  author={Liu, Yinhan and Ott, Myle and Goyal, Naman and Du, Jingfei and Joshi, Mandar and Chen, Danqi and Levy, Omer and Lewis, Mike and Zettlemoyer, Luke and Stoyanov, Veselin},
+  journal={arXiv preprint arXiv:1907.11692},
+  year={2019}
+}
+
+@article{zhang2017encoding,
+  title={Which encoding is the best for text classification in chinese, english, japanese and korean?},
+  author={Zhang, Xiang and LeCun, Yann},
+  journal={arXiv preprint arXiv:1708.02657},
+  year={2017}
+}
+
+@article{zhao2019uer,
+  title={UER: An Open-Source Toolkit for Pre-training Models},
+  author={Zhao, Zhe and Chen, Hui and Zhang, Jinbin and Zhao, Xin and Liu, Tao and Lu, Wei and Chen, Xi and Deng, Haotang and Ju, Qi and Du, Xiaoyong},
+  journal={EMNLP-IJCNLP 2019},
+  pages={241},
+  year={2019}
+}
+
+@article{zhao2023tencentpretrain,
+  title={TencentPretrain: A Scalable and Flexible Toolkit for Pre-training Models of Different Modalities},
+  author={Zhao, Zhe and Li, Yudong and Hou, Cheng and Zhao, Jing and others},
+  journal={ACL 2023},
+  pages={217},
+  year={2023}
