@@ -50,7 +50,7 @@
 - **GitHub仓库**：在[GitHub](https://github.com/samzshi0529/HanziNLP)上探索我的代码并做出贡献。
 - **PyPI页面**：在[PyPI](https://libraries.io/pypi/HanziNLP)上找到我，并探索更多关于如何将HanziNLP集成到您的项目中的信息。
 
-### 1.2 安装和使用
+### 1.2 安装与使用
 
 使用HanziNLP只需执行一个简单的命令即可开始！
 
@@ -87,6 +87,85 @@ dashboard()
 #### 亮点
 
 `dashboard` 函数强调**用户参与**和**探索**。它允许用户与各种预训练模型和分词参数进行交互式交流，观察它们对文本分析和情感分类的影响。这种交互式探索使用户能够做出明智的决策，选择最符合他们特定用例的模型和参数，从而增强他们的文本分析和自然语言处理（NLP）任务。
+
+## 2. 字符和词汇计数
+
+🚀 这个基本功能计算文本中的字符和单词数量，省去了您自己识别和分割中文单词的手动努力。
+
+### char_freq 和 word_freq 函数
+- `char_freq(text, text_only=True)`: 函数用于计算给定文本中每个字符的频率；如果 text_only == True，只会计算中文和英文字符。如果 text_only == False，将计算所有字符。默认为 True。
+- `word_freq(text)`: 函数用于计算给定文本中每个单词的频率。
+### 示例
+```python
+from HanziNLP import char_freq, word_freq
+
+text = "你好, 世界!"
+char_count = char_freq(text)
+word_count = word_freq(text)
+
+print(f"字符计数: {char_count}")
+print(f"单词计数: {word_count}")
+```
+### 输出 
+```python
+字符计数: 4
+单词计数: 2
+```
+## 3. 字体管理
+
+在Python环境中可视化中文文本时，字体是一个经常需要手动导入的重要资源。HanziNLP内置了字体列表，可立即使用。您可以使用`list_fonts()`查看和过滤所有可用的字体，并使用`get_font()`检索用于可视化目的的特定字体路径。所有内置的字体都来自Google字体，它们根据开放字体许可证获得许可，这意味着您可以在产品和项目中使用它们——无论是印刷品还是数字品，无论是商业的还是其他的。
+
+### list_fonts 和 get_font 函数
+- `list_fonts()`: 列出所有可用的字体。
+- `get_font(font_name, show=True)`: 检索用于可视化目的的特定字体。如果 show == True，将显示字体的样本可视化。如果 show == False，将不显示任何内容。默认设置为True。
+
+#### list_fonts() 示例
+```python
+from HanziNLP import list_fonts
+
+# 列出所有可用的字体
+list_fonts()
+```
+#### 输出
+![示例图片](README_PIC/list_fonts().png)
+
+#### get_font() 示例
+```python
+from HanziNLP import get_font
+
+font_path = get_font('ZCOOLXiaoWei-Regular') #在 list_fonts() 中输入您喜欢的 font_name
+```
+#### 输出
+![示例图片](README_PIC/get_font.png)
+
+#### 词云示例
+您可以使用定义的中文 font_path 制作各种图表。下面提供了一个词云示例：
+```python
+from PIL import Image
+from wordcloud import WordCloud,ImageColorGenerator
+import matplotlib.pyplot as plt
+
+# 由GPT-4生成的样本文本
+text = '在明媚的春天里，小花猫咪悠闲地躺在窗台上，享受着温暖的阳光。她的眼睛闪烁着好奇的光芒，时不时地观察着窗外忙碌的小鸟和蝴蝶。小猫的尾巴轻轻摇动，表达着她内心的舒适和满足。在她的身边，一盆盛开的紫罗兰散发着淡淡的香气，给这个宁静的午后增添了几分诗意。小花猫咪偶尔会闭上她的眼睛，沉浸在这美好的时光中，仿佛整个世界都变得温馨和谐。窗外的樱花树在微风中轻轻摇曳，洒下一片片粉色的花瓣，如梦如幻。在这样的一个悠托的春日里，一切都显得如此美好和平静。'
+
+text = " ".join(text)
+
+# 生成词云
+wordcloud = WordCloud(font_path= font_path, width=800, height=800,
+                      background_color='white',
+                      min_font_size=10).generate(text)
+
+# 显示词云
+plt.figure(figsize=(5, 5), facecolor=None)
+plt.imshow(wordcloud)
+plt.axis("off")
+plt.tight_layout(pad=0)
+plt.title("样本词云")
+
+plt.show()
+```
+#### 输出
+![示例图片](README_PIC/wordcloud.png)
 
 
 </details>
