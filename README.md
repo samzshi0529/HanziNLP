@@ -1282,6 +1282,7 @@ sentiment = {'none': 2.7154697818332352e-05, 'disgust': 2.6893396352534182e-05, 
 ![Example Image](README_PIC/sentiment.png)
 
 ## Citation
+The Bibliography of this package can be found [here](Bibliography.txt)
 
 If you use **HanziNLP** in your research, please consider citing it as follows:
 
