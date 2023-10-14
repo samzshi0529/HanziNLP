@@ -450,7 +450,15 @@ The text is tokenized into words, and for each word, the function checks whether
 - **Utilizing FastText**: FastText models, which are pre-trained on a large corpus of text, are employed to generate word embeddings.
 - **Support for Multiple Languages**: Specifically designed to handle texts containing both English and Chinese words by utilizing respective language models.
 - **Dimensionality Reduction**: Offers the flexibility to reduce the dimensionality of the embeddings if a smaller size is desired.
-  
+
+#### example
+```python
+from HanziNLP import Word2Vec
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+result = Word2Vec(sample_sentence)
+```
+
 ### 7.2 BERT Embeddings
 - **Function**: `get_bert_embeddings(text, model="bert-base-chinese")`
 - **Purpose**: Retrieve BERT embeddings for a specified text using a pre-trained Chinese BERT model.
