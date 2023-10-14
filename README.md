@@ -429,8 +429,27 @@ text_similarity(sample, sample1, method = 'levenshtein')
 
 ## 7. Word Embeddings
 
-### Word2Vec and get_bert_embeddings Functions
+### Word2Vec 
 - `Word2Vec`: Obtain word embeddings using the FastText model.
+- **Function**: `Word2Vec(text, dimension=300)`
+- **Purpose**: Obtain word embeddings for a text that may contain both English and Chinese words, utilizing pre-trained FastText models.
+- **Parameters**:
+  - `text` (str): The input text, which may encompass both English and Chinese words.
+  - `dimension` (int): The dimensionality of the resulting word embeddings. Default is 300.
+- **Returns**: 
+  - `list of numpy.ndarray`: A list containing the word embeddings for each word present in the input text.
+
+#### Overview
+
+The `Word2Vec` function is designed to generate word embeddings for a given text, which may contain words from both English and Chinese languages, using pre-trained FastText models. Initially, the function checks and downloads the FastText models for English and Chinese if they are not already downloaded. Subsequently, it loads the models and, if requested, reduces their dimensionality to the specified size.
+
+The text is tokenized into words, and for each word, the function checks whether it contains Chinese characters. If a word contains Chinese characters, the Chinese FastText model is used to get its embedding; otherwise, the English model is used. The resulting embeddings are appended to a list which is then returned.
+
+- **Utilizing FastText**: FastText models, which are pre-trained on a large corpus of text, are employed to generate word embeddings.
+- **Support for Multiple Languages**: Specifically designed to handle texts containing both English and Chinese words by utilizing respective language models.
+- **Dimensionality Reduction**: Offers the flexibility to reduce the dimensionality of the embeddings if a smaller size is desired.
+  
+### BERT Emebeddings
 - `get_bert_embeddings`: Obtain word embeddings using the BERT model.
 
 ## 8. Topic Modeling
