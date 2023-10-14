@@ -56,6 +56,13 @@ pip install HanziNLP
 
 ### 1.3 Interactive Dashboard
 
+Use the dashboard() by a simple line!
+
+```python
+from HanziNLP import dashboard
+dashboard()
+```
+
 - **Function**: `dashboard()`
 - **Purpose**: Present a user-friendly dashboard that facilitates interactive text analysis and sentiment classification, enabling users to observe the impacts of various pre-trained models and tokenization parameters on the processed text and thereby select the optimal model and parameters for their use case.
 - **Parameters**: No parameters are required.
