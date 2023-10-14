@@ -693,7 +693,7 @@ For any improvement and more information about me, you can find via the followin
 
 ## 1. Quick Start
 
-Welcome to **HanziNLP** 🌟 - an ready-to-use toolkit for Natural Language Processing (NLP) on Chinese text, while also accommodating English. It is designed to be user-friendly and simplified tool even for freshmen in python. 
+Welcome to **HanziNLP** 🌟 - an ready-to-use toolkit for Natural Language Processing (NLP) on Chinese text, while also accommodating English. It is designed to be user-friendly and simplified tool even for freshmen in python like simple way for Chinese word tokenization and visualization via built-in Chinese fonts(Simplified Chinese).
 
 Moreover, HanziNLP features an interactive dashboard for dynamic insights into NLP functionalities, providing a dynamic overview and insights into various NLP functionalities.
 
