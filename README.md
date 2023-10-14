@@ -26,7 +26,6 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
   - [8.2 LDA print_topics function](#82-lda-print-topics-function)
 - [9. Sentiment Analysis](#9-sentiment-analysis)
 
-
 ## Developer Note:
 
 To anyone using HanziNLP, big thanks to you from the developer 施展,Samuel Shi! 🎉🎉🎉 
@@ -54,6 +53,27 @@ Getting started with HanziNLP is as simple as executing a single command!
 ```python
 pip install HanziNLP
 ```
+
+### 1.3 Interactive Dashboard
+
+- **Function**: `dashboard()`
+- **Purpose**: Present a user-friendly dashboard that facilitates interactive text analysis and sentiment classification, enabling users to observe the impacts of various pre-trained models and tokenization parameters on the processed text and thereby select the optimal model and parameters for their use case.
+- **Parameters**: No parameters are required.
+- **Returns**: No return value; the function outputs a dashboard interface.
+
+#### Overview
+
+The `dashboard` function introduces a user-interactive dashboard, designed to perform text analysis and sentiment classification, providing users with a hands-on experience to explore and understand the effects of different pre-trained models and tokenization parameters on text processing.
+
+- **Interactive Text Analysis**: Users can input text, observe various text statistics, such as word count, character count, and sentence count, and visualize token frequencies and sentiment classification results.
+- **Model Exploration**: Users have the option to specify a classification model from Hugging Face. If left blank, a default model, 'uer/roberta-base-finetuned-chinanews-chinese', is utilized. More about this model can be found on [Hugging Face](https://huggingface.co/uer/roberta-base-finetuned-chinanews-chinese).
+- **Tokenization Parameter Tuning**: Users can adjust tokenization settings, such as the 'Jieba Mode' parameter and stopwords selection, and observe the resultant tokens and their respective frequencies.
+- **Visualization**: The dashboard provides visual insights into text statistics, word frequencies, and sentiment classification, aiding users in understanding the text analysis results.
+- **Sentiment Classification**: The dashboard performs sentiment classification using the specified (or default) model and displays the probability distribution across sentiment labels.
+
+#### Highlight
+
+The `dashboard` function emphasizes **user engagement** and **exploration**. It allows users to interactively engage with various pre-trained models and tokenization parameters, observing their effects on text analysis and sentiment classification. This interactive exploration enables users to make informed decisions, selecting the model and parameters that best align with their specific use case, thereby enhancing their text analysis and natural language processing (NLP) tasks.
 
 ## 2. Character and Word Counting
 
