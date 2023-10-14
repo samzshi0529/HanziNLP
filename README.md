@@ -237,12 +237,50 @@ token
 ```
 
 ## Text Representation
+Building text feature map is the starting point for various Machine Learning or Deep Learning tasks. HanziNLP has incorporate the common feature map methods that can be easily implemented.
 
-### BoW, ngrams, TF_IDF, and TT_matrix Functions
-- `BoW`: Generate a Bag of Words representation of the input text.
-- `ngrams`: Generate n-grams from the input text.
-- `TF_IDF`: Generate a TF-IDF representation of the input text.
-- `TT_matrix`: Generate a term-term matrix of the input text.
+### BoW (Bag of Words)
+
+- **Function**: `BoW(segmented_text_list)`
+- **Purpose**: Generate a Bag of Words representation from a list of segmented texts.
+- **Parameters**:
+  - `segmented_text_list` (list of str): A list containing segmented texts.
+- **Returns**: 
+  - `dict`: A dictionary representing word frequencies.
+
+### ngrams
+
+- **Function**: `ngrams(tokens, n=3)`
+- **Purpose**: Create and count the frequency of n-grams from a list of tokens.
+- **Parameters**:
+  - `tokens` (list): A list of tokens.
+  - `n` (int, optional): The number for n-grams. Default is 3 (trigrams).
+- **Returns**: 
+  - `dict`: A dictionary with n-grams as keys and their frequencies as values.
+
+### TF_IDF (Term Frequency-Inverse Document Frequency)
+
+- **Function**: `TF_IDF(text_list, max_features=None, output_format='sparse')`
+- **Purpose**: Transform a list of texts into a TF-IDF representation.
+- **Parameters**:
+  - `text_list` (list of str): A list of texts to be transformed.
+  - `max_features` (int, optional): Maximum number of features (terms) to be extracted. Defaults to None (all features).
+  - `output_format` (str, optional): Format of the output matrix ('sparse', 'dense', or 'dataframe'). Defaults to 'sparse'.
+- **Returns**: 
+  - `matrix`: TF-IDF matrix in the specified format.
+  - `feature_names`: List of feature names.
+
+### TT_matrix (Term-Term Matrix)
+
+- **Function**: `TT_matrix(tokenized_texts, window_size=1)`
+- **Purpose**: Generate a term-term matrix from a list of tokenized texts, representing term co-occurrences within a specified window.
+- **Parameters**:
+  - `tokenized_texts` (list of list of str): A list of tokenized texts.
+  - `window_size` (int): The window size for co-occurrence. Default is 1.
+- **Returns**: 
+  - `np.array`: A square matrix where entry (i, j) is the co-occurrence between term i and term j.
+  - `index_to_term`: A dictionary mapping from index to term.
+
 
 ## Text Similarity
 
