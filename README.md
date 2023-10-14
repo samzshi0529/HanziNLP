@@ -128,11 +128,22 @@ plt.show()
 
 ### Stopword Management
 
-### list_stopwords and load_stopwords Functions
+#### list_stopwords and load_stopwords Functions
 - `list_stopwords`: List all available stopwords.
 - `load_stopwords`: Load stopwords from a specified file.
 
-### sentence_segment and word_tokenize Functions
+##### list_stopwords example
+```python
+from HanziNLP import list_stopwords
+
+list_stopwords()
+```
+##### output 
+![Example Image](README_PIC/list_stopwords.png)
+
+### Tokenization Specifics
+
+#### sentence_segment and word_tokenize Functions
 - `sentence_segment`: Segment the input text into sentences.
 - `word_tokenize`: Tokenize the input text into words and remove stopwords.
 
