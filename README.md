@@ -4,11 +4,31 @@
 
 <details>
 <summary>🇨🇳 Chinese Version (点击查看中文版本)</summary>
+  
 ## 目录
-- [1. 快速开始](#1-快速开始)
-  - [1.1 相关链接](#11-相关链接)
-  - [1.2 安装和使用](#12-安装和使用)
-  - [1.3 交互式仪表板](#13-交互式仪表板)
+- [1. 快速开始](#1-quick-start)
+  - [1.1 相关链接](#11-related-links)
+  - [1.2 安装与使用](#12-installing-and-usage)
+  - [1.3 交互式仪表板](#13-interactive-dashboard)
+- [2. 字符和词汇计数](#2-character-and-word-counting)
+- [3. 字体管理](#3-font-management)
+- [4. 文本分段](#4-text-segmentation)
+  - [4.1 停用词管理](#41-stopword-management)
+  - [4.2 句子分段](#42-sentence-segmentation)
+  - [4.3 词语标记](#43-word-tokenization)
+- [5. 文本表示](#5-text-representation)
+  - [5.1 词袋模型 (BoW)](#51-bow-bag-of-words)
+  - [5.2 ngrams](#52-ngrams)
+  - [5.3 TF_IDF (词频-逆文档频率)](#53-tf_idf-term-frequency-inverse-document-frequency)
+  - [5.4 TT_matrix (词-词矩阵)](#54-tt_matrix-term-term-matrix)
+- [6. 文本相似性](#6-text-similarity)
+- [7. 词嵌入](#7-word-embeddings)
+  - [7.1 Word2Vec](#71-word2vec)
+  - [7.2 BERT 嵌入](#72-bert-embeddings)
+- [8. 主题建模](#8-topic-modeling)
+  - [8.1 潜在狄利克雷分配 (LDA) 模型](#81-latent-dirichlet-allocation-lda-model)
+  - [8.2 LDA print_topics 函数](#82-lda-print-topics-function)
+- [9. 情感分析](#9-sentiment-analysis)
 
 </details>
 
