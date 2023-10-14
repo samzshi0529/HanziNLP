@@ -178,7 +178,7 @@ stopwords = load_stopwords('common_stopwords.txt') # Enter the txt file name her
 
 ### Sentence Segmentation
 This function segments a whole document or paragraphs into sentences. Support both Chinese and English text.
-- `sentence_segment`: Segment the input text into sentences. 
+- `sentence_segment(text)`: Segment the input text into sentences. 
 
 #### sentence_segment example: This example intentially chooses a hard sentence to split.
 ```python
