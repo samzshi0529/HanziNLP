@@ -10,9 +10,8 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
 - [Font Management](#font-management)
 - [Text Segmentation](#text-segmentation)
   - [Stopword Management](#stopword-management)
-  - [Tokenization Specifics](#tokenization-specifics)
-    - [Sentence Segmentation](#sentence-segmentation)
-    - [Word Tokenization](#word-tokenization)
+  - [Sentence Segmentation](#sentence-segmentation)
+  - [Word Tokenization](#word-tokenization)
 - [Text Representation](#text-representation)
 - [Text Similarity](#text-similarity)
 - [Word Embeddings](#word-embeddings)
@@ -177,25 +176,23 @@ stopwords = load_stopwords('common_stopwords.txt') # Enter the txt file name her
 }
 ```
 
-### Tokenization Specifics
-After selecting a stopword to use, we can begin to tokenize the text using the stopword defined. 
-
-#### Sentence Segmentation
+### Sentence Segmentation
+This function segments a whole document or paragraphs into sentences. Support both Chinese and English text.
 - `sentence_segment`: Segment the input text into sentences. 
 
-##### sentence_segment example: This example intentially chooses a hard sentence to split.
+#### sentence_segment example: This example intentially chooses a hard sentence to split.
 ```python
 from HanziNLP import sentence_segment
 
 sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
 sentence_segment(sample_sentence)
 ```
-##### output 
+#### output 
 ```python
 ['hello world!', 'This is Sam.', '。', '除非你不说。', '我今天就会很开心,hello .', 'you。']
 ```
 
-#### Word Tokenization
+### Word Tokenization
 - `word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, 
                   include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)`: Tokenize the input text into words and remove stopwords.
 Specific parameter introduciton is listed here:
@@ -212,7 +209,7 @@ Specific parameter introduciton is listed here:
     Returns:
     list: A list of tokens after removing stopwords.
 ```
-##### Example 1：
+#### Example 1：
 ```python
 from HanziNLP import word_tokenize
 
@@ -225,7 +222,7 @@ token
 ```python
 ['不', '说', '，', '会', '很', '开心', ',', '#', '$', '@', '#', '@', '*']
 ```
-##### Example 2： set text_only to be True and custom_stopwords to be ['开心']
+#### Example 2： set text_only to be True and custom_stopwords to be ['开心']
 ```python
 from HanziNLP import word_tokenize
 
@@ -234,7 +231,7 @@ token = sz.word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt'
                   include_numbers=True, custom_stopwords=['开心'], exclude_default_stopwords=False)
 token
 ```
-##### output: Special characters and the word '开心' are removed
+#### output: Special characters and the word '开心' are removed
 ```python
 ['不', '说', '会', '很']
 ```
