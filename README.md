@@ -30,6 +30,34 @@
   - [8.2 LDA print_topics 函数](#82-lda-print-topics-function)
 - [9. 情感分析](#9-sentiment-analysis)
 
+## 开发者备注：
+
+对于任何使用HanziNLP的人,开发者向您表示衷心的感谢！🎉🎉🎉
+
+关于我更多的信息和任何改进的建议，您可以通过以下方式找到我：
+- **个人邮箱**：samzshi@sina.com
+- **个人网站**：[https://www.samzshi.com/](https://www.samzshi.com/)
+- **领英**：[www.linkedin.com/in/zhanshisamuel](www.linkedin.com/in/zhanshisamuel)
+
+## 1. 快速开始
+
+欢迎来到 **HanziNLP** 🌟 - 一个即用的中文文本自然语言处理（NLP）工具包，同时也支持英文。它旨在成为即便是Python新手也能友好使用的简化工具。
+
+此外，HanziNLP还提供了一个交互式仪表板，用于动态洞察NLP功能，为各种NLP功能提供动态概览和洞察。
+
+### 1.1 相关链接
+
+- **GitHub仓库**：在[GitHub](https://github.com/samzshi0529/HanziNLP)上探索我的代码并做出贡献。
+- **PyPI页面**：在[PyPI](https://libraries.io/pypi/HanziNLP)上找到我，并探索更多关于如何将HanziNLP集成到您的项目中的信息。
+
+### 1.2 安装和使用
+
+使用HanziNLP只需执行一个简单的命令即可开始！
+
+```python
+pip install HanziNLP
+```
+
 </details>
 
 # HanziNLP
