@@ -74,7 +74,7 @@ When visualizing Chinese text in Python environment, font is a vital resource wh
 
 ### list_fonts and get_font Functions
 - `list_fonts()`: List all available fonts.
-- `get_font(font_name, show=True)`: Retrieve a specific font for visualization purposes.
+- `get_font(font_name, show=True)`: Retrieve a specific font for visualization purposes. If show == True, a sample visualization of the font will be shown. If show == False, nothing will be shown. Default set to be True.
 
 #### list_fonts() example
 ```python
@@ -139,8 +139,8 @@ To remove stopwords in Chinese text, the package have built-in common stopwords 
 | 常用停用词表 | common_stopwords.txt |
 
 #### list_stopwords and load_stopwords Functions
-- `list_stopwords`: List all available stopwords.
-- `load_stopwords`: Load stopwords from a specified file.
+- `list_stopwords()`: List all available stopwords.
+- `load_stopwords(file_name)`: Load stopwords from a specified file.
 
 ##### list_stopwords example
 ```python
@@ -161,9 +161,8 @@ stopwords = load_stopwords('common_stopwords.txt') # Enter the txt file name her
 ### Tokenization Specifics
 After selecting a stopword to use, we can begin to tokenize the text using the stopword defined. 
 
-#### sentence_segment and word_tokenize Functions
+#### sentence_segment
 - `sentence_segment`: Segment the input text into sentences. 
-- `word_tokenize`: Tokenize the input text into words and remove stopwords.
 
 ##### sentence_segment example: This example intentially chooses a hard sentence to split.
 ```python
@@ -177,8 +176,25 @@ sentence_segment(sample_sentence)
 ['hello world!', 'This is Sam.', '。', '除非你不说。', '我今天就会很开心,hello .', 'you。']
 ```
 
-##### word_tokenize
+#### word tokenization
+- `word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, 
+                  include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)`: Tokenize the input text into words and remove stopwords.
+Specific parameter introduciton is listed here:
+```python
+    Tokenize Chinese text and remove stopwords.
 
+    Parameters:
+    text (str): The input Chinese text.
+    mode (str): Tokenization mode ('all', 'precise', or 'search_engine'). Default is 'precise'.
+    stopwords (set): A set of stopwords.
+    text_only (Boolean): Only tokenize English and Chinese texts if True. Default is False.
+    include_numbers (Boolean): Whether to include numbers in the tokenized output. Default is True.
+    custom_stopwords (list, optional): A list of custom stopwords to remove. Default is None.
+    exclude_default_stopwords (bool, optional): Whether to exclude default stopwords. Default is False.
+
+    Returns:
+    list: A list of tokens after removing stopwords.
+```
 ## Text Representation
 
 ### BoW, ngrams, TF_IDF, and TT_matrix Functions
