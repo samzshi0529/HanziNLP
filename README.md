@@ -193,22 +193,21 @@ sentence_segment(sample_sentence)
 ```
 
 ### Word Tokenization
-- `word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, 
-                  include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)`: Tokenize the input text into words and remove stopwords.
-Specific parameter introduciton is listed here:
-```python
-    Parameters:
-    text (str): The input Chinese text.
-    mode (str): Tokenization mode ('all', 'precise', or 'search_engine'). Default is 'precise'.
-    stopwords (set): A set of stopwords. Enter the stopwords file name here. 
-    text_only (Boolean): Only tokenize English and Chinese texts if True. Default is False.
-    include_numbers (Boolean): Whether to include numbers in the tokenized output. Default is True.
-    custom_stopwords (list, optional): A list of custom stopwords to remove. Default is None.
-    exclude_default_stopwords (bool, optional): Whether to exclude default stopwords. Default is False.
 
-    Returns:
-    list: A list of tokens after removing stopwords.
-```
+- **Function**: `word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)`
+- **Purpose**: Tokenize the input text into words while providing options to manage stopwords effectively.
+  
+#### Parameters:
+- `text` (str): The input Chinese text.
+- `mode` (str, optional): Tokenization mode, choose from 'all', 'precise', or 'search_engine'. Default is 'precise'.
+- `stopwords` (str, optional): A filename string indicating the stopwords file to be used. Default is 'common_stopwords.txt'.
+- `text_only` (bool, optional): If True, only tokenize English and Chinese texts. Default is False.
+- `include_numbers` (bool, optional): Include numbers in the tokenized output if True. Default is True.
+- `custom_stopwords` (list of str, optional): A list of custom stopwords to be removed. Default is None.
+- `exclude_default_stopwords` (bool, optional): Exclude default stopwords if True. Default is False.
+
+#### Returns:
+- `list`: A list of tokens, with stopwords removed according to the specified parameters.
 #### Example 1：
 ```python
 from HanziNLP import word_tokenize
