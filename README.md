@@ -1,6 +1,6 @@
 # HanziNLP
 
-An user-friendly Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization.
+An **user-friendly** and **easy-to-use** Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization.
 
 ## Table of Contents
 - [Introduction](#introduction)
