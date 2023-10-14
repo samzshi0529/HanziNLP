@@ -8,8 +8,9 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
   - [Installing and Usage](#installing-and-usage)
 - [Character and Word Counting](#character-and-word-counting)
 - [Font Management](#font-management)
-- [Text Segmentation](#text-segmentation)
-- [Stopword Management](#stopword-management)
+- [Word Tokenization](#word-tokenization)
+  - [Stopword Management](#stopword-management)
+  - [Text Segmentation](#text-segmentation)
 - [Text Representation](#text-representation)
 - [Text Similarity](#text-similarity)
 - [Word Embeddings](#word-embeddings)
@@ -89,7 +90,7 @@ list_fonts()
 ```python
 from HanziNLP import get_font
 
-font_path = get_font('ZCOOLXiaoWei-Regular')
+font_path = get_font('ZCOOLXiaoWei-Regular') #Enter the font_name you like in list_fonts()
 ```
 #### output
 ![Example Image](README_PIC/get_font.png)
@@ -123,17 +124,17 @@ plt.show()
 #### output
 ![Example Image](README_PIC/wordcloud.png)
 
-## Text Segmentation
+## Word Tokenization
 
-### sentence_segment and word_tokenize Functions
-- `sentence_segment`: Segment the input text into sentences.
-- `word_tokenize`: Tokenize the input text into words and remove stopwords.
-
-## Stopword Management
+### Stopword Management
 
 ### list_stopwords and load_stopwords Functions
 - `list_stopwords`: List all available stopwords.
 - `load_stopwords`: Load stopwords from a specified file.
+
+### sentence_segment and word_tokenize Functions
+- `sentence_segment`: Segment the input text into sentences.
+- `word_tokenize`: Tokenize the input text into words and remove stopwords.
 
 ## Text Representation
 
