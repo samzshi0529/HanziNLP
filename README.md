@@ -29,6 +29,7 @@
   - [8.1 潜在狄利克雷分配 (LDA) 模型](#81-潜在狄利克雷分配-lda-模型)
   - [8.2 LDA print_topics 函数](#82-lda-print_topics-函数)
 - [9. 情感分析](#9-情感分析)
+- [在您的研究中引用HanziNLP](#在您的研究中引用HanziNLP)
 
 ## 开发者备注：
 
@@ -627,6 +628,28 @@ sentiment = {'none': 2.7154697818332352e-05, 'disgust': 2.6893396352534182e-05, 
 ```
 ![示例图片](README_PIC/sentiment.png)
 
+## 在您的研究中引用HanziNLP
+
+如果您在研究中使用了 **HanziNLP**，请考虑按照以下方式引用它：
+
+### APA 格式
+
+Zhi, S. (2023). HanziNLP (版本 1.0.0) [软件]。GitHub。[https://github.com/samzshi0529/HanziNLP](https://github.com/samzshi0529/HanziNLP)
+
+### BibTeX 条目
+
+对于 LaTeX 文档的使用，您可以使用以下 BibTeX 引用：
+
+```bibtex
+@misc{Zhi2023,
+  author = {Zhi, S.},
+  title = {HanziNLP},
+  year = {2023},
+  publisher = {GitHub},
+  version = {1.0.0},
+  howpublished = {\url{https://github.com/samzshi0529/HanziNLP}}
+}
+```
 </details>
 
 # HanziNLP
