@@ -45,7 +45,7 @@ Getting started with HanziNLP is as simple as executing a single command!
 pip install HanziNLP
 ```
 
-## Character and Word Counting 📊
+## Character and Word Counting
 
 🚀 This basic function count the characters and words in your text, sparing you the manual effot of identifying and splitting Chinese words on your own. 
 
