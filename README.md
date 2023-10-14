@@ -4,13 +4,13 @@
 
 <detail>
 <summary>🇨🇳 Chinese Version (点击查看中文版本)</summary>
+
+sfdafds
 <detail>
-  
-# HanziNLP
+
+# HanziNLP <summary> English Version</summary>
 
 An **user-friendly** and **easy-to-use** Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization. All functions in HanziNLP supports Chinese text and works well for Chinese text!
-
-<summary> English Version</summary>
 
 ## Table of Contents
 - [1. Quick Start](#1-quick-start)
