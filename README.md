@@ -19,7 +19,7 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
 - [9. Sentiment Analysis](#9-sentiment-analysis)
 
 
-## Developer
+## Developer Note:
 
 To anyone using HanziNLP, big thanks to you from the developer 施展,Samuel Shi! 🎉🎉🎉 
 
