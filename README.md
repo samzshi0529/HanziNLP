@@ -129,7 +129,7 @@ plt.show()
 ## 4. Text Segmentation
 Text Segmentatino is a vital step in any NLP tasks. The general step is to segment the sentences, remove stopwords, and tokenize each sentences separately. The detailed instructions are introduced below. 
 
-### Stopword Management
+### 4.1 Stopword Management
 To remove stopwords in Chinese text, the package have built-in common stopwords lists include the following ones: (Some stopwords are from [stopwords](https://github.com/goto456/stopwords/))
 
 | Stopword List | File Name |
@@ -177,7 +177,7 @@ stopwords = load_stopwords('common_stopwords.txt') # Enter the txt file name her
 }
 ```
 
-### Sentence Segmentation
+### 4.2 Sentence Segmentation
 This function segments a whole document or paragraphs into sentences. Support both Chinese and English text.
 - `sentence_segment(text)`: Segment the input text into sentences. 
 
@@ -193,7 +193,7 @@ sentence_segment(sample_sentence)
 ['hello world!', 'This is Sam.', '。', '除非你不说。', '我今天就会很开心,hello .', 'you。']
 ```
 
-### Word Tokenization
+### 4.3 Word Tokenization
 As one of the most important step in preprocessing text for NLP tasks, the word_tokenize() function provide a direct way to transform raw Chinese text into tokens. 
 
 - **Function**: `word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)`
