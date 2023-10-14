@@ -54,7 +54,7 @@ pip install HanziNLP
 ### char_freq and word_freq Functions
 - `char_freq(text, text_only=True)`: Function to calculate the frequency of each character in a given text; If text_only == True, only Chinese and English characters will be counted. If text_only == False, all characters will be counted. Default to be True.
 - `word_freq(text)`: Function to calculate the frequency of each word in a given text.
-### Code Example
+### Example
 ```python
 from HanziNLP import char_freq, word_freq
 
@@ -65,7 +65,7 @@ word_count = word_freq(text)
 print(f"Character Count: {char_count}")
 print(f"Word Count: {word_count}")
 ```
-### Output Example
+### Output 
 ```python
 Charater Count: 4
 Word Count: 2
@@ -159,6 +159,23 @@ from HanziNLP import load_stopwords
 
 stopwords = load_stopwords('common_stopwords.txt') # Enter the txt file name here
 ```
+##### output 
+```python
+{'然而',
+ 'whoever',
+ '只限',
+ '的确',
+ '要不然',
+ 'each',
+ '仍旧',
+ '这么点儿',
+ '冒',
+ '如果',
+ '比及',
+ '以期',
+ '犹自'.....
+}
+```
 
 ### Tokenization Specifics
 After selecting a stopword to use, we can begin to tokenize the text using the stopword defined. 
@@ -195,7 +212,7 @@ Specific parameter introduciton is listed here:
     Returns:
     list: A list of tokens after removing stopwords.
 ```
-##### word_tokenize() example 1： This example intentially chooses a hard sentence to split.
+##### Example 1：
 ```python
 from HanziNLP import word_tokenize
 
@@ -208,7 +225,7 @@ token
 ```python
 ['不', '说', '，', '会', '很', '开心', ',', '#', '$', '@', '#', '@', '*']
 ```
-##### word_tokenize() example 2： set text_only to be True and custom_stopwords to be ['开心']
+##### Example 2： set text_only to be True and custom_stopwords to be ['开心']
 ```python
 from HanziNLP import word_tokenize
 
