@@ -280,7 +280,7 @@ token
 ## 5. 文本表示
 构建文本特征图是各种机器学习或深度学习任务的起点。HanziNLP已整合了可以轻松实现的常见特征图方法。
 
-### 5.1 BoW（词袋模型）
+### 5.1 词袋模型 (BoW)
 
 - **函数**：`BoW(segmented_text_list)`
 - **目的**：从一系列分段文本中生成词袋模型表示。
@@ -333,7 +333,7 @@ ngram
  '会 开心 hello': 1}
 ```
 
-### 5.3 TF_IDF（词频-逆文档频率）
+### 5.3 TF_IDF (词频-逆文档频率)
 
 - **函数**：`TF_IDF(text_list, max_features=None, output_format='sparse')`
 - **目的**：将文本列表转换为TF-IDF表示。
@@ -357,7 +357,7 @@ tfidf_matrix
 #### 输出 
 ![示例图片](README_PIC/TFIDF.png)
 
-### 5.4 TT_matrix（术语-术语矩阵）
+### 5.4 TT_matrix (词-词矩阵)
 
 - **函数**：`TT_matrix(tokenized_texts, window_size=1)`
 - **目的**：从标记文本列表生成术语-术语矩阵，表示指定窗口内的术语共现。
