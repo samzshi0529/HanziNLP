@@ -20,7 +20,7 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
 - [6. Text Similarity](#6-text-similarity)
 - [7. Word Embeddings](#7-word-embeddings)
   - [7.1 Word2Vec](#71-word2vec)
-  - [7.2 BERT Emebeddings](#72-bert-embeddings)
+  - [7.2 BERT Embeddings](#72-bert-embeddings)
 - [8. Topic Modeling](#8-topic-modeling)
 - [9. Sentiment Analysis](#9-sentiment-analysis)
 
@@ -451,7 +451,7 @@ The text is tokenized into words, and for each word, the function checks whether
 - **Support for Multiple Languages**: Specifically designed to handle texts containing both English and Chinese words by utilizing respective language models.
 - **Dimensionality Reduction**: Offers the flexibility to reduce the dimensionality of the embeddings if a smaller size is desired.
   
-### 7.2 BERT Emebeddings
+### 7.2 BERT Embeddings
 - **Function**: `get_bert_embeddings(text, model="bert-base-chinese")`
 - **Purpose**: Retrieve BERT embeddings for a specified text using a pre-trained Chinese BERT model.
 - **Parameters**:
