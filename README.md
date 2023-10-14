@@ -3,7 +3,7 @@
 An **user-friendly** and **easy-to-use** Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization. All functions in HanziNLP supports Chinese text and works well for Chinese text!
 
 ## Table of Contents
-- [1. Introduction](#1-introduction)
+- [1. Quick Start](#1-quick-start)
   - [1.1 Related Links](#11-related-links)
   - [1.2 Installing and Usage](#12-installing-and-usage)
 - [2. Character and Word Counting](#2-character-and-word-counting)
@@ -36,7 +36,7 @@ For any improvement and more information about me, you can find via the followin
 - **Personal Webiste**: [https://www.samzshi.com/](https://www.samzshi.com/)
 - **Linkedin**: [www.linkedin.com/in/zhanshisamuel](www.linkedin.com/in/zhanshisamuel)
 
-## 1. Introduction
+## 1. Quick Start
 
 Welcome to **HanziNLP** 🌟 - an ready-to-use toolkit for Natural Language Processing (NLP) on Chinese text, while also accommodating English. It is designed to be user-friendly and simplified tool even for freshmen in python. 
 
