@@ -27,3 +27,13 @@ Default pretrained model in Dashboard():
   journal={ACL 2023},
   pages={217},
   year={2023}
+
+LDA Model:
+@article{Blei2003,
+  title={Latent Dirichlet Allocation},
+  author={Blei, David M. and Ng, Andrew Y. and Jordan, Michael I.},
+  journal={Journal of Machine Learning Research},
+  volume={3},
+  pages={993--1022},
+  year={2003}
+}
