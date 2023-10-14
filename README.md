@@ -2,6 +2,9 @@
 
 An **user-friendly** and **easy-to-use** Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization. All functions in HanziNLP supports Chinese text and works well for Chinese text!
 
+<details>
+<summary>🇨🇳 Chinese Version (点击查看中文版本)</summary>
+
 ## Table of Contents
 - [1. Quick Start](#1-quick-start)
   - [1.1 Related Links](#11-related-links)
