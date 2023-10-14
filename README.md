@@ -19,6 +19,8 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
   - [5.4 TT_matrix (Term-Term Matrix)](#54-tt_matrix-term-term-matrix)
 - [6. Text Similarity](#6-text-similarity)
 - [7. Word Embeddings](#7-word-embeddings)
+  - [7.1 Word2Vec](#71-word2vec)
+  - [7.2 BERT Emebeddings](#72-bert-embeddings)
 - [8. Topic Modeling](#8-topic-modeling)
 - [9. Sentiment Analysis](#9-sentiment-analysis)
 
@@ -429,7 +431,7 @@ text_similarity(sample, sample1, method = 'levenshtein')
 
 ## 7. Word Embeddings
 
-### Word2Vec 
+### 7.1 Word2Vec 
 - `Word2Vec`: Obtain word embeddings using the FastText model.
 - **Function**: `Word2Vec(text, dimension=300)`
 - **Purpose**: Obtain word embeddings for a text that may contain both English and Chinese words, utilizing pre-trained FastText models.
@@ -449,8 +451,25 @@ The text is tokenized into words, and for each word, the function checks whether
 - **Support for Multiple Languages**: Specifically designed to handle texts containing both English and Chinese words by utilizing respective language models.
 - **Dimensionality Reduction**: Offers the flexibility to reduce the dimensionality of the embeddings if a smaller size is desired.
   
-### BERT Emebeddings
-- `get_bert_embeddings`: Obtain word embeddings using the BERT model.
+### 7.2 BERT Emebeddings
+- **Function**: `get_bert_embeddings(text, model="bert-base-chinese")`
+- **Purpose**: Retrieve BERT embeddings for a specified text using a pre-trained Chinese BERT model.
+- **Parameters**:
+  - `text` (str): The input text for which embeddings are to be generated.
+  - `model` (str): The name of the pre-trained Chinese BERT model to be utilized. Default is "bert-base-chinese."
+- **Returns**: 
+  - `sentence_embedding` (list): The sentence embedding represented as a list of floats.
+  - `tokens` (list): The tokens associated with the sentence embedding.
+
+#### Overview
+
+The `get_bert_embeddings` function is engineered to extract BERT embeddings for a given text using a specified pre-trained Chinese BERT model. Initially, the function loads the designated BERT model and its corresponding tokenizer. The input text is tokenized and prepared for the model, ensuring it is truncated to a maximum length of 512 tokens to be compatible with the BERT model.
+
+Subsequent to tokenization, the model generates predictions, and the last hidden states of the BERT model are retrieved. The sentence embedding is computed by taking the mean of the last hidden states and converting it to a list of floats. Additionally, the tokens associated with the sentence embedding are obtained by converting the input IDs back to tokens.
+
+- **Utilizing BERT**: Leverages a pre-trained BERT model, renowned for its effectiveness in generating contextual embeddings.
+- **Support for Chinese Text**: Specifically tailored to handle Chinese text by utilizing a Chinese BERT model.
+- **Token Handling**: Ensures tokens are appropriately managed and returned alongside embeddings for reference and further analysis.
 
 ## 8. Topic Modeling
 
