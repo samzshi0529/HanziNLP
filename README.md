@@ -8,9 +8,11 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
   - [Installing and Usage](#installing-and-usage)
 - [Character and Word Counting](#character-and-word-counting)
 - [Font Management](#font-management)
-- [Word Tokenization](#word-tokenization)
+- [Text Segmentation](#text-segmentation)
   - [Stopword Management](#stopword-management)
-  - [Text Segmentation](#text-segmentation)
+  - [Tokenization Specifics](#tokenization-specifics)
+    - [Sentence Segmentation](#sentence-segmentation)
+    - [Word Tokenization](#word-tokenization)
 - [Text Representation](#text-representation)
 - [Text Similarity](#text-similarity)
 - [Word Embeddings](#word-embeddings)
@@ -124,8 +126,8 @@ plt.show()
 #### output
 ![Example Image](README_PIC/wordcloud.png)
 
-## Word Tokenization
-Word Tokenization is a vital step in any NLP tasks. The general step is to segment the sentences, remove stopwords, and tokenize each sentences separately. The detailed instructions are introduced below. 
+## Text Segmentation
+Text Segmentatino is a vital step in any NLP tasks. The general step is to segment the sentences, remove stopwords, and tokenize each sentences separately. The detailed instructions are introduced below. 
 
 ### Stopword Management
 To remove stopwords in Chinese text, the package have built-in common stopwords lists include the following ones: (Some stopwords are from [stopwords](https://github.com/goto456/stopwords/))
@@ -161,7 +163,7 @@ stopwords = load_stopwords('common_stopwords.txt') # Enter the txt file name her
 ### Tokenization Specifics
 After selecting a stopword to use, we can begin to tokenize the text using the stopword defined. 
 
-#### sentence_segment
+#### Sentence Segmentation
 - `sentence_segment`: Segment the input text into sentences. 
 
 ##### sentence_segment example: This example intentially chooses a hard sentence to split.
@@ -176,13 +178,11 @@ sentence_segment(sample_sentence)
 ['hello world!', 'This is Sam.', '。', '除非你不说。', '我今天就会很开心,hello .', 'you。']
 ```
 
-#### word tokenization
+#### Word Tokenization
 - `word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, 
                   include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)`: Tokenize the input text into words and remove stopwords.
 Specific parameter introduciton is listed here:
 ```python
-    Tokenize Chinese text and remove stopwords.
-
     Parameters:
     text (str): The input Chinese text.
     mode (str): Tokenization mode ('all', 'precise', or 'search_engine'). Default is 'precise'.
