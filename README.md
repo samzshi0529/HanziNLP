@@ -543,8 +543,56 @@ tokenized_texts = [sz.word_tokenize(sentence) for sentence in sentences]
 lda_model, corpus, dictionary = lda_model(tokenized_texts, num_topics=5)
 print_topics(lda_model)
 ```
+#### output
+``` python
+Topic: 0 
+Words: 0.231*"This" + 0.231*"Sam" + 0.231*"." + 0.038*"说" + 0.038*"hello" + 0.038*"world" + 0.038*"!" + 0.038*"今天" + 0.038*"开心" + 0.038*"会"
+Topic: 1 
+Words: 0.231*"world" + 0.231*"!" + 0.231*"hello" + 0.038*"说" + 0.038*"." + 0.038*"Sam" + 0.038*"This" + 0.038*"今天" + 0.038*"会" + 0.038*"开心"
+Topic: 2 
+Words: 0.091*"说" + 0.091*"This" + 0.091*"!" + 0.091*"hello" + 0.091*"." + 0.091*"world" + 0.091*"Sam" + 0.091*"开心" + 0.091*"今天" + 0.091*"会"
+Topic: 3 
+Words: 0.146*"." + 0.146*"hello" + 0.146*"," + 0.146*"会" + 0.146*"开心" + 0.146*"今天" + 0.024*"说" + 0.024*"Sam" + 0.024*"!" + 0.024*"world"
+Topic: 4 
+Words: 0.375*"说" + 0.063*"hello" + 0.063*"." + 0.063*"!" + 0.063*"Sam" + 0.063*"world" + 0.063*"This" + 0.063*"今天" + 0.063*"会" + 0.063*"开心"
+```
 
 ## 9. Sentiment Analysis
+Sentiment Analysis is common in NLP tasks when sentiment of text could contribute to analysis in further research. 
 
 ### sentiment Function
-- `sentiment`: Perform sentiment analysis on the input text using a specified pre-trained model.
+
+- **Function**: `sentiment(text, model='hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2', print_all=True, show=False)`
+- **Purpose**: Execute sentiment analysis on the input text utilizing the specified pre-trained model and optionally visualize the probability distribution across sentiment labels.
+- **Parameters**:
+  - `text` (str): The input text subject to sentiment analysis.
+  - `model` (str): The identifier of the pre-trained model to be used. Default is 'hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2'.
+  - `print_all` (bool): Indicator whether to print probabilities for all labels or only the label with the highest probability. Default is True.
+  - `show` (bool): Indicator whether to display a bar chart showing the probability distribution across labels. Default is False.
+- **Returns**: 
+  - `dict` or `tuple`: If `print_all` is True, a dictionary containing sentiment labels and their corresponding probabilities. If `print_all` is False, a tuple containing the label with the highest probability and its corresponding probability.
+
+#### Overview
+
+The `sentiment` function is tailored to perform sentiment analysis on a provided text using a specified pre-trained model. Upon loading the tokenizer and model, the input text is tokenized and passed through the model to obtain output logits. These logits are then converted to probabilities using the softmax function. The labels corresponding to these probabilities are retrieved from the model’s configuration and stored in a dictionary along with their respective probabilities.
+
+If `show` is set to True, a bar chart visualizing the probability distribution across sentiment labels is displayed. The function returns either a dictionary of all sentiment labels and their corresponding probabilities (if `print_all` is True) or a tuple containing the label with the highest probability and its corresponding probability (if `print_all` is False).
+
+- **Sentiment Analysis**: Utilizes a specified pre-trained model to analyze the sentiment of the input text.
+- **Visualization**: Optionally visualizes the probability distribution across sentiment labels using a bar chart.
+- **Flexible Output**: Provides flexibility in output, allowing for detailed or concise sentiment analysis results.
+
+#### example
+```python
+from HanziNLP import sentiment
+
+text = "这个小兄弟弹的太好了"
+sentiment= sentiment(text, model = 'touch20032003/xuyuan-trial-sentiment-bert-chinese', show = True)
+print('sentiment =' , sentiment)
+```
+#### output
+``` python
+sentiment = {'none': 2.7154697818332352e-05, 'disgust': 2.6893396352534182e-05, 'happiness': 0.00047770512173883617, 'like': 0.9991452693939209, 'fear': 3.293586996733211e-05, 'sadness': 0.00013537798076868057, 'anger': 8.243478805525228e-05, 'surprise': 7.21854084986262e-05}
+```
+![Example Image](README_PIC/sentiment.png)
+
