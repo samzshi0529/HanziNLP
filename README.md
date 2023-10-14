@@ -3,20 +3,21 @@
 An **user-friendly** and **easy-to-use** Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization.
 
 ## Table of Contents
-- [Introduction](#introduction)
-  - [Related Links](#related-links)
-  - [Installing and Usage](#installing-and-usage)
-- [Character and Word Counting](#character-and-word-counting)
-- [Font Management](#font-management)
-- [Text Segmentation](#text-segmentation)
-  - [Stopword Management](#stopword-management)
-  - [Sentence Segmentation](#sentence-segmentation)
-  - [Word Tokenization](#word-tokenization)
-- [Text Representation](#text-representation)
-- [Text Similarity](#text-similarity)
-- [Word Embeddings](#word-embeddings)
-- [Topic Modeling](#topic-modeling)
-- [Sentiment Analysis](#sentiment-analysis)
+- [1. Introduction](#1-introduction)
+  - [1.1 Related Links](#11-related-links)
+  - [1.2 Installing and Usage](#12-installing-and-usage)
+- [2. Character and Word Counting](#2-character-and-word-counting)
+- [3. Font Management](#3-font-management)
+- [4. Text Segmentation](#4-text-segmentation)
+  - [4.1 Stopword Management](#41-stopword-management)
+  - [4.2 Sentence Segmentation](#42-sentence-segmentation)
+  - [4.3 Word Tokenization](#43-word-tokenization)
+- [5. Text Representation](#5-text-representation)
+- [6. Text Similarity](#6-text-similarity)
+- [7. Word Embeddings](#7-word-embeddings)
+- [8. Topic Modeling](#8-topic-modeling)
+- [9. Sentiment Analysis](#9-sentiment-analysis)
+
 
 ## Developer
 
@@ -27,18 +28,18 @@ For any improvement and more information about me, you can find via the followin
 - **Personal Webiste**: [https://www.samzshi.com/](https://www.samzshi.com/)
 - **Linkedin**: [www.linkedin.com/in/zhanshisamuel](www.linkedin.com/in/zhanshisamuel)
 
-## Introduction
+## 1. Introduction
 
 Welcome to **HanziNLP** 🌟 - an ready-to-use toolkit for Natural Language Processing (NLP) on Chinese text, while also accommodating English. It is designed to be user-friendly and simplified tool even for freshmen in python. 
 
 Moreover, HanziNLP features an interactive dashboard for dynamic insights into NLP functionalities, providing a dynamic overview and insights into various NLP functionalities.
 
-### Related Links
+### 1.1 Related Links
 
 - **GitHub Repository**: Explore my code and contribute on [GitHub](https://github.com/samzshi0529/HanziNLP).
 - **PyPI Page**: Find me on [PyPI](https://libraries.io/pypi/HanziNLP) and explore more about how to integrate HanziNLP into your projects.
 
-### Installation and Usage
+### 1.2 Installation and Usage
 
 Getting started with HanziNLP is as simple as executing a single command!
 
@@ -46,7 +47,7 @@ Getting started with HanziNLP is as simple as executing a single command!
 pip install HanziNLP
 ```
 
-## Character and Word Counting
+## 2. Character and Word Counting
 
 🚀 This basic function count the characters and words in your text, sparing you the manual effot of identifying and splitting Chinese words on your own. 
 
@@ -69,7 +70,7 @@ print(f"Word Count: {word_count}")
 Charater Count: 4
 Word Count: 2
 ```
-## Font Management
+## 3. Font Management
 
 When visualizing Chinese text in Python environment, font is a vital resource which is often needed from manual importing. HanziNLP have built-in list of fonts for usage right away. You can use list_fonts() to see and filter all available fonts and use get_font() to retrieve a specific font path for visualization purposes. All built-in fonts are from Google fonts that are licensed under the Open Font License, meaning one can use them in your products & projects – print or digital, commercial or otherwise.
 
@@ -125,7 +126,7 @@ plt.show()
 #### output
 ![Example Image](README_PIC/wordcloud.png)
 
-## Text Segmentation
+## 4. Text Segmentation
 Text Segmentatino is a vital step in any NLP tasks. The general step is to segment the sentences, remove stopwords, and tokenize each sentences separately. The detailed instructions are introduced below. 
 
 ### Stopword Management
@@ -237,7 +238,7 @@ token
 ['不', '说', '会', '很']
 ```
 
-## Text Representation
+## 5. Text Representation
 Building text feature map is the starting point for various Machine Learning or Deep Learning tasks. HanziNLP has incorporate the common feature map methods that can be easily implemented.
 
 ### BoW (Bag of Words)
@@ -317,28 +318,24 @@ ngram
   - `index_to_term`: A dictionary mapping from index to term.
 
 
-## Text Similarity
+## 6. Text Similarity
 
 ### text_similarity Function
 - `text_similarity`: Calculate the similarity between two texts using various methods.
 
-## Word Embeddings
+## 7. Word Embeddings
 
 ### Word2Vec and get_bert_embeddings Functions
 - `Word2Vec`: Obtain word embeddings using the FastText model.
 - `get_bert_embeddings`: Obtain word embeddings using the BERT model.
 
-## Topic Modeling
+## 8. Topic Modeling
 
 ### lda_model and print_topics Functions
 - `lda_model`: Train an LDA model on the input text.
 - `print_topics`: Print the topics identified by the LDA model.
 
-## Sentiment Analysis
+## 9. Sentiment Analysis
 
 ### sentiment Function
 - `sentiment`: Perform sentiment analysis on the input text using a specified pre-trained model.
-
----
-
-Feel free to modify the descriptions and add any additional information or usage examples that you think would be helpful for users of your package!
