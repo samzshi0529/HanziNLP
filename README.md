@@ -657,6 +657,7 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
   - [8.1 Latent Dirichlet Allocation (LDA) model](#81-latent-dirichlet-allocation-lda-model)
   - [8.2 LDA print_topics function](#82-lda-print-topics-function)
 - [9. Sentiment Analysis](#9-sentiment-analysis)
+- [Citation](#citation)
 
 ## Developer Note:
 
@@ -1257,3 +1258,24 @@ sentiment = {'none': 2.7154697818332352e-05, 'disgust': 2.6893396352534182e-05, 
 ```
 ![Example Image](README_PIC/sentiment.png)
 
+## Citation
+
+If you use **HanziNLP** in your research, please consider citing it as follows:
+
+### APA Style
+
+Zhan, Shi. (2023). HanziNLP (Version 0.1.0) [Software]. GitHub. [https://github.com/samzshi0529/HanziNLP](https://github.com/samzshi0529/HanziNLP)
+
+### BibTeX Entry
+
+For use in LaTeX documents, you can use the following BibTeX citation:
+
+```bibtex
+@misc{Doe2023,
+  author = {Zhan, Shi.},
+  title = {HanziNLP},
+  year = {2023},
+  publisher = {GitHub},
+  version = {0.1.0},
+  howpublished = {\url{https://github.com/samzshi0529/HanziNLP}}
+}
