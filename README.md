@@ -23,7 +23,7 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
   - [7.2 BERT Embeddings](#72-bert-embeddings)
 - [8. Topic Modeling](#8-topic-modeling)
   - [8.1 Latent Dirichlet Allocation (LDA) model](#81-latent-dirichlet-allocation-lda-model)
-  - [8.2 LDA print_topics function](#82-lda-print_topics-function)
+  - [8.2 LDA print_topics function](#82-lda-print-topics-function)
 - [9. Sentiment Analysis](#9-sentiment-analysis)
 
 
@@ -515,7 +515,7 @@ The `lda_model` function is devised to train an LDA model on a collection of tex
 - **Flexible Training**: Allows specification of the number of topics, training passes, and optionally, a precomputed dictionary.
 - **Applicability**: Suitable for analyzing large volumes of text data to discover thematic structures.
 
-### 8.2 LDA print_topics function
+### 8.2 LDA print topics function
 
 - **Function**: `print_topics(lda_model, num_words=10)`
 - **Purpose**: Display the top words associated with each topic from a trained LDA model.
