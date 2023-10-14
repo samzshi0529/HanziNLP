@@ -193,6 +193,7 @@ sentence_segment(sample_sentence)
 ```
 
 ### Word Tokenization
+As one of the most important step in preprocessing text for NLP tasks, the word_tokenize() function provide a direct way to transform raw Chinese text into tokens. 
 
 - **Function**: `word_tokenize(text, mode='precise', stopwords='common_stopwords.txt', text_only=False, include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)`
 - **Purpose**: Tokenize the input text into words while providing options to manage stopwords effectively.
@@ -208,6 +209,7 @@ sentence_segment(sample_sentence)
 
 #### Returns:
 - `list`: A list of tokens, with stopwords removed according to the specified parameters.
+
 #### Example 1：
 ```python
 from HanziNLP import word_tokenize
@@ -217,7 +219,7 @@ token = sz.word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt'
                   include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)
 token
 ```
-##### output 
+#### output 
 ```python
 ['不', '说', '，', '会', '很', '开心', ',', '#', '$', '@', '#', '@', '*']
 ```
@@ -247,6 +249,20 @@ Building text feature map is the starting point for various Machine Learning or 
 - **Returns**: 
   - `dict`: A dictionary representing word frequencies.
 
+#### example
+```python
+from HanziNLP import word_tokenize, BoW
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+token = word_tokenize(sample_sentence, text_only = True)
+bow = BoW(token)
+bow
+```
+#### output 
+```python
+{'hello': 2, 'world': 1, 'This': 1, 'Sam': 1, '说': 1, '今天': 1, '会': 1, '开心': 1}
+```
+
 ### ngrams
 
 - **Function**: `ngrams(tokens, n=3)`
@@ -256,6 +272,26 @@ Building text feature map is the starting point for various Machine Learning or 
   - `n` (int, optional): The number for n-grams. Default is 3 (trigrams).
 - **Returns**: 
   - `dict`: A dictionary with n-grams as keys and their frequencies as values.
+
+#### example
+```python
+from HanziNLP import word_tokenize, ngrams
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+token = word_tokenize(sample_sentence, text_only = True)
+ngram = ngrams(token, n =3)
+ngram
+```
+#### output 
+```python
+{'hello world This': 1,
+ 'world This Sam': 1,
+ 'This Sam 说': 1,
+ 'Sam 说 今天': 1,
+ '说 今天 会': 1,
+ '今天 会 开心': 1,
+ '会 开心 hello': 1}
+```
 
 ### TF_IDF (Term Frequency-Inverse Document Frequency)
 
