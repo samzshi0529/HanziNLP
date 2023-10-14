@@ -479,6 +479,15 @@ Subsequent to tokenization, the model generates predictions, and the last hidden
 - **Support for Chinese Text**: Specifically tailored to handle Chinese text by utilizing a Chinese BERT model.
 - **Token Handling**: Ensures tokens are appropriately managed and returned alongside embeddings for reference and further analysis.
 
+#### example
+```python
+from HanziNLP import get_bert_embeddings
+
+embeddings, tokens = get_bert_embeddings(text, model = "bert-base-chinese") # enter the BERT Model name you wish to use from Hugging Face
+print(f"Tokens: {tokens}")
+print(f"Embeddings: {embeddings}")
+```
+
 ## 8. Topic Modeling
 
 ### lda_model and print_topics Functions
