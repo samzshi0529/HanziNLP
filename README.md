@@ -142,7 +142,7 @@ To remove stopwords in Chinese text, the package have built-in common stopwords 
 
 #### list_stopwords and load_stopwords Functions
 - `list_stopwords()`: List all available stopwords.
-- `load_stopwords(file_name)`: Load stopwords from a specified file.
+- `load_stopwords(file_name)`: Load stopwords from a specified file to a list of words. You can then see and use the stopwords for later usage. 
 
 ##### list_stopwords example
 ```python
@@ -203,7 +203,7 @@ Specific parameter introduciton is listed here:
     Parameters:
     text (str): The input Chinese text.
     mode (str): Tokenization mode ('all', 'precise', or 'search_engine'). Default is 'precise'.
-    stopwords (set): A set of stopwords.
+    stopwords (set): A set of stopwords. Enter the stopwords file name here. 
     text_only (Boolean): Only tokenize English and Chinese texts if True. Default is False.
     include_numbers (Boolean): Whether to include numbers in the tokenized output. Default is True.
     custom_stopwords (list, optional): A list of custom stopwords to remove. Default is None.
