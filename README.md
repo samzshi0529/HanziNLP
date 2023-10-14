@@ -122,6 +122,7 @@ plt.title("sample wordcloud")
 plt.show()
 ```
 #### output
+![Example Image](README_PIC/wordcloud.png)
 
 ## Text Segmentation
 
