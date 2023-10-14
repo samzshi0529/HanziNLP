@@ -383,7 +383,24 @@ array([[0., 4., 4., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
 ## 6. Text Similarity
 
 ### text_similarity Function
-- `text_similarity`: Calculate the similarity between two texts using various methods.
+- **Function**: `text_similarity(text1, text2, method='cosine')`
+- **Purpose**: To calculate and return the similarity score between two input texts, utilizing a specified method.
+- **Parameters**:
+  - `text1` (str): The first text string for comparison.
+  - `text2` (str): The second text string for comparison.
+  - `method` (str): The method utilized for computing similarity. Options include 'cosine', 'jaccard', 'euclidean', or 'levenshtein'. Default is 'cosine'.
+- **Returns**: 
+  - `float`: A numerical value representing the similarity score between `text1` and `text2`.
+
+#### Overview
+
+The `text_similarity` function is meticulously crafted to calculate the similarity between two text strings, namely `text1` and `text2`, using a method specified by the user. Initially, the function tokenizes the input texts and converts them into vectorized forms. Subsequently, it computes the similarity score based on the chosen method, which can be one of the following: 'cosine', 'jaccard', 'euclidean', or 'levenshtein'.
+
+- **Cosine Similarity**: Measures the cosine of the angle between two non-zero vectors, providing a measure of the cosine of the angle between them.
+- **Jaccard Similarity**: Calculates the size of the intersection divided by the size of the union of the two text strings.
+- **Euclidean Similarity**: Utilizes the Euclidean distance between two vectors to compute similarity.
+- **Levenshtein Similarity**: Employs the Levenshtein distance, or "edit distance", between two strings, normalized to a similarity score.
+
 
 ## 7. Word Embeddings
 
