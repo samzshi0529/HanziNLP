@@ -634,7 +634,7 @@ sentiment = {'none': 2.7154697818332352e-05, 'disgust': 2.6893396352534182e-05, 
 
 ### APA 格式
 
-Zhan, Shi. (2023). HanziNLP (版本 0.1.0) [软件]。GitHub。[https://github.com/samzshi0529/HanziNLP](https://github.com/samzshi0529/HanziNLP)
+Zhan, Shi. (2023). HanziNLP (Version 0.1.0) [Software]. GitHub. [https://github.com/samzshi0529/HanziNLP](https://github.com/samzshi0529/HanziNLP)
 
 ### BibTeX 条目
 
@@ -1294,7 +1294,7 @@ Zhan, Shi. (2023). HanziNLP (Version 0.1.0) [Software]. GitHub. [https://github.
 For use in LaTeX documents, you can use the following BibTeX citation:
 
 ```bibtex
-@misc{Doe2023,
+@misc{Zhan2023,
   author = {Zhan, Shi.},
   title = {HanziNLP},
   year = {2023},
