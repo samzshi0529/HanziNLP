@@ -2,7 +2,7 @@
 
 一个**用户友好**且**易于使用**的自然语言处理包，专为中文文本分析、建模和可视化而设计。HanziNLP中的所有功能都支持中文文本，并且非常适用于中文文本分析！
 
-<details>
+
 <summary>🇨🇳 Chinese Version (点击查看中文版本)</summary>
   
 # HanziNLP
