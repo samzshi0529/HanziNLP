@@ -39,7 +39,7 @@ Moreover, HanziNLP features an interactive dashboard for dynamic insights into N
 - **GitHub Repository**: Explore my code and contribute on [GitHub](https://github.com/samzshi0529/HanziNLP).
 - **PyPI Page**: Find me on [PyPI](https://libraries.io/pypi/HanziNLP) and explore more about how to integrate HanziNLP into your projects.
 
-### 1.2 Installation and Usage
+### 1.2 Installing and Usage
 
 Getting started with HanziNLP is as simple as executing a single command!
 
