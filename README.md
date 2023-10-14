@@ -195,6 +195,33 @@ Specific parameter introduciton is listed here:
     Returns:
     list: A list of tokens after removing stopwords.
 ```
+##### word_tokenize() example 1： This example intentially chooses a hard sentence to split.
+```python
+from HanziNLP import word_tokenize
+
+sample = '除非你不说，我今天就会很开心,hello you#$@#@*'
+token = sz.word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt', text_only=False, 
+                  include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)
+token
+```
+##### output 
+```python
+['不', '说', '，', '会', '很', '开心', ',', '#', '$', '@', '#', '@', '*']
+```
+##### word_tokenize() example 2： set text_only to be True and custom_stopwords to be ['开心']
+```python
+from HanziNLP import word_tokenize
+
+sample = '除非你不说，我今天就会很开心,hello you#$@#@*'
+token = sz.word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt', text_only=True, 
+                  include_numbers=True, custom_stopwords=['开心'], exclude_default_stopwords=False)
+token
+```
+##### output: Special characters and the word '开心' are removed
+```python
+['不', '说', '会', '很']
+```
+
 ## Text Representation
 
 ### BoW, ngrams, TF_IDF, and TT_matrix Functions
