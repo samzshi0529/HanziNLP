@@ -3,7 +3,7 @@
 一个**用户友好**且**易于使用**的自然语言处理包，专为中文文本分析、建模和可视化而设计。HanziNLP中的所有功能都支持中文文本，并且非常适用于中文文本分析！
 
 <details>
-<summary>🇨🇳 Chinese Version (点击查看中文版本)</summary>
+<summary>🇨🇳 Chinese Version (点击查看中文版本,由GPT-4翻译完成)</summary>
   
 ## 目录
 - [1. 快速开始](#1-快速开始)
@@ -415,7 +415,217 @@ array([[0., 4., 4., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
         0.]])
 ```
 
+## 6. 文本相似度
 
+### text_similarity 函数
+- **函数**: `text_similarity(text1, text2, method='cosine')`
+- **目的**: 使用指定的方法计算并返回两个输入文本之间的相似度分数。
+- **参数**:
+  - `text1` (str): 用于比较的第一个文本字符串。
+  - `text2` (str): 用于比较的第二个文本字符串。
+  - `method` (str): 用于计算相似度的方法。选项包括 'cosine'、'jaccard'、'euclidean' 或 'levenshtein'。默认为 'cosine'。
+- **返回**: 
+  - `float`: 表示 `text1` 和 `text2` 之间相似度分数的数值。
+
+#### 概述
+
+`text_similarity` 函数精心制作，用于使用用户指定的方法计算两个文本字符串（即 `text1` 和 `text2`）之间的相似度。首先，函数对输入文本进行分词并将其转换为向量形式。随后，它根据所选方法计算相似度分数，该方法可以是以下之一：'cosine'、'jaccard'、'euclidean' 或 'levenshtein'。
+
+- **余弦相似度**: 测量两个非零向量之间角度的余弦，提供它们之间角度的余弦度量。
+- **Jaccard 相似度**: 计算两个文本字符串的交集大小除以它们的并集大小。
+- **欧几里得相似度**: 利用两个向量之间的欧几里得距离来计算相似度。
+- **莱文斯坦相似度**: 使用两个字符串之间的莱文斯坦距离（或“编辑距离”），标准化为相似度分数。
+
+#### 示例 1：Jaccard 相似度
+```python
+from HanziNLP import text_similarity
+
+sample='你好世界'
+sample1 = '你好世界，hello world'
+text_similarity(sample, sample1, method = 'jaccard')
+```
+#### 输出 
+```python
+0.5
+```
+
+#### 示例 2：莱文斯坦相似度
+```python
+from HanziNLP import text_similarity
+
+sample='你好世界'
+sample1 = '你好世界，hello world'
+text_similarity(sample, sample1, method = 'levenshtein')
+```
+#### 输出 
+```python
+0.07692307692307693
+```
+
+## 7. 词嵌入
+
+### 7.1 Word2Vec 
+- `Word2Vec`: 使用 FastText 模型获取词嵌入。
+- **函数**: `Word2Vec(text, dimension=300)`
+- **目的**: 使用预训练的 FastText 模型为可能包含英文和中文单词的文本获取词嵌入。
+- **参数**:
+  - `text` (str): 可能包含英文和中文单词的输入文本。
+  - `dimension` (int): 生成的词嵌入的维度。默认值为 300。
+- **返回**: 
+  - `list of numpy.ndarray`: 一个包含输入文本中每个单词的词嵌入的列表。
+
+#### 概述
+
+`Word2Vec` 函数旨在使用预训练的 FastText 模型为给定文本生成词嵌入，该文本可能包含来自英文和中文的单词。首先，函数检查并下载英文和中文的 FastText 模型（如果尚未下载）。接下来，它加载模型，并在请求时将其维度减小到指定的大小。
+
+文本被分词成单词，对于每个单词，函数检查它是否包含中文字符。如果一个单词包含中文字符，则使用中文 FastText 模型获取其嵌入；否则，使用英文模型。生成的嵌入被追加到一个列表中，然后返回该列表。
+
+- **使用 FastText**: 使用在大量文本语料上预训练的 FastText 模型生成词嵌入。
+- **支持多种语言**: 专为处理包含英文和中文单词的文本而设计，通过使用各自的语言模型。
+- **降维**: 提供将嵌入的维度减小到所需大小的灵活性。
+
+#### 示例
+```python
+from HanziNLP import Word2Vec
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+result = Word2Vec(sample_sentence)
+```
+
+### 7.2 BERT 嵌入
+- **函数**: `get_bert_embeddings(text, model="bert-base-chinese")`
+- **目的**: 使用预训练的中文 BERT 模型为指定文本检索 BERT 嵌入。
+- **参数**:
+  - `text` (str): 需要生成嵌入的输入文本。
+  - `model` (str): 将要使用的预训练中文 BERT 模型的名称。默认为 "bert-base-chinese"。
+- **返回**: 
+  - `sentence_embedding` (list): 表示为浮点数列表的句子嵌入。
+  - `tokens` (list): 与句子嵌入相关联的令牌。
+
+#### 概述
+
+`get_bert_embeddings` 函数旨在使用指定的预训练中文 BERT 模型为给定文本提取 BERT 嵌入。首先，函数加载指定的 BERT 模型及其相应的分词器。输入文本被分词并为模型准备好，确保它被截断为最多 512 个令牌，以便与 BERT 模型兼容。
+
+在分词之后，模型生成预测，并检索 BERT 模型的最后隐藏状态。通过取最后隐藏状态的平均值并将其转换为浮点数列表来计算句子嵌入。此外，通过将输入 ID 转换回令牌来获取与句子嵌入关联的令牌。
+
+- **利用 BERT**: 利用预训练的 BERT 模型，因其在生成上下文嵌入方面的效果而闻名。
+- **支持中文文本**: 通过使用中文 BERT 模型专门处理中文文本。
+- **令牌处理**: 确保令牌被适当管理，并与嵌入一起返回，以供参考和进一步分析。
+
+#### 示例
+```python
+from HanziNLP import get_bert_embeddings
+
+embeddings, tokens = get_bert_embeddings(text, model = "bert-base-chinese") # 输入你希望使用的 Hugging Face 的 BERT 模型名称
+print(f"Tokens: {tokens}")
+print(f"Embeddings: {embeddings}")
+```
+
+## 8. 主题建模
+HanziNLP 已集成了代码，以便轻松实现 LDA 模型，从大量文本中提取主题。将更新更多模型：
+
+### 8.1 潜在狄利克雷分配 (LDA) 模型
+
+- **函数**: `lda_model(texts, num_topics=10, passes=15, dictionary=None)`
+- **目的**: 在提供的文本上训练一个潜在狄利克雷分配 (LDA) 模型，以提取和识别主题。
+- **参数**:
+  - `texts` (list of list of str): 文档的列表，每个文档表示为一个令牌列表。
+  - `num_topics` (int): 要提取的主题数量。默认为 10。
+  - `passes` (int): 通过语料库的训练次数。默认为 15。
+  - `dictionary` (corpora.Dictionary, 可选): 一个可选的预计算 Gensim 字典。
+- **返回**: 
+  - `lda_model`: 训练过的 LDA 模型。
+  - `corpus`: 用于训练模型的语料库。
+  - `dictionary`: 用于训练模型的字典。
+
+#### 概述
+
+`lda_model` 函数旨在在文本集合上训练一个 LDA 模型，便于提取和识别潜在的主题。如果没有提供预计算的字典，函数会从输入文本生成一个新的字典。文本被转换为词袋表示形式，LDA 模型使用指定或默认参数进行训练。返回训练过的模型、语料库和字典，以便进一步分析和主题可视化。
+
+- **主题建模**: 利用 LDA，一种流行的主题建模技术，揭示文本数据中的潜在主题。
+- **灵活的训练**: 允许指定主题数量、训练次数和（可选的）预计算字典。
+- **适用性**: 适用于分析大量文本数据，以发现主题结构。
+
+### 8.2 LDA 打印主题函数
+
+- **函数**: `print_topics(lda_model, num_words=10)`
+- **目的**: 显示来自训练过的 LDA 模型的每个主题的前几个单词。
+- **参数**:
+  - `lda_model`: 训练过的 LDA 模型。
+  - `num_words` (int): 每个主题要显示的前几个单词。默认为 10。
+- **返回**: 
+  - 无（输出打印到控制台）。
+
+#### 概述
+
+`print_topics` 函数旨在显示来自训练过的 LDA 模型的每个主题的前几个单词，提供了每个主题的主题实质的快速而有见地的概览。通过迭代每个主题，它打印主题索引和前几个单词，帮助解释和分析 LDA 模型提取的主题。
+
+- **主题解释**: 便于轻松解释 LDA 模型生成的主题。
+- **自定义输出**: 允许用户指定每个主题要显示的前几个单词。
+- **有见地的概览**: 提供了文本数据中主要主题的简洁而信息丰富的概览。
+
+#### 示例
+```python
+from HanziNLP import sentence_segment, word_tokenize, lda_model, print_topics
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+sentences = sentence_segment(sample_sentence)
+tokenized_texts = [word_tokenize(sentence) for sentence in sentences]
+lda_model, corpus, dictionary = lda_model(tokenized_texts, num_topics=5)
+print_topics(lda_model)
+```
+#### 输出
+```python
+Topic: 0 
+Words: 0.231*"This" + 0.231*"Sam" + 0.231*"." + 0.038*"说" + 0.038*"hello" + 0.038*"world" + 0.038*"!" + 0.038*"今天" + 0.038*"开心" + 0.038*"会"
+Topic: 1 
+Words: 0.231*"world" + 0.231*"!" + 0.231*"hello" + 0.038*"说" + 0.038*"." + 0.038*"Sam" + 0.038*"This" + 0.038*"今天" + 0.038*"会" + 0.038*"开心"
+Topic: 2 
+Words: 0.091*"说" + 0.091*"This" + 0.091*"!" + 0.091*"hello" + 0.091*"." + 0.091*"world" + 0.091*"Sam" + 0.091*"开心" + 0.091*"今天" + 0.091*"会"
+Topic: 3 
+Words: 0.146*"." + 0.146*"hello" + 0.146*"," + 0.146*"会" + 0.146*"开心" + 0.146*"今天" + 0.024*"说" + 0.024*"Sam" + 0.024*"!" + 0.024*"world"
+Topic: 4 
+Words: 0.375*"说" + 0.063*"hello" + 0.063*"." + 0.063*"!" + 0.063*"Sam" + 0.063*"world" + 0.063*"This" + 0.063*"今天" + 0.063*"会" + 0.063*"开心"
+```
+
+## 9. 情感分析
+情感分析在 NLP 任务中很常见，文本的情感可以为进一步的研究分析做出贡献。虽然有许多方法可以进行情感分析，比如使用情感词典，但HanziNLP集成了函数，允许轻松使用预训练的 BERT 模型或 Huggin Face 上的其他语言模型进行文本分类。
+
+### sentiment 函数
+
+- **函数**: `sentiment(text, model='hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2', print_all=True, show=False)`
+- **目的**: 使用指定的预训练模型对输入文本执行情感分析，并可选择性地可视化情感标签的概率分布。
+- **参数**:
+  - `text` (str): 用于情感分析的输入文本。
+  - `model` (str): 要使用的预训练模型的标识符。您可以使用 **Hugging Face** 上的任何模型，并在此处复制模型名称以用于对文本进行分类。默认为 'hw2942/bert-base-chinese-finetuning-financial-news-sentiment-v2'。
+  - `print_all` (bool): 指示是否打印所有标签的概率，或仅打印概率最高的标签。默认为 True。
+  - `show` (bool): 指示是否显示显示标签概率分布的条形图。默认为 False。
+- **返回**: 
+  - `dict` 或 `tuple`: 如果 `print_all` 为 True，则返回一个包含情感标签及其相应概率的字典。如果 `print_all` 为 False，则返回一个包含概率最高的标签及其相应概率的元组。
+
+#### 概述
+
+`sentiment` 函数专为使用指定的预训练模型对提供的文本执行情感分析而定制。在加载分词器和模型后，输入文本被分词并传递给模型以获取输出 logits。然后使用 softmax 函数将这些 logits 转换为概率。从模型的配置中检索与这些概率相对应的标签，并将它们及其各自的概率存储在字典中。
+
+如果 `show` 设置为 True，则显示一个条形图，可视化情感标签的概率分布。函数返回一个包含所有情感标签及其相应概率的字典（如果 `print_all` 为 True），或包含概率最高的标签及其相应概率的元组（如果 `print_all` 为 False）。
+
+- **情感分析**: 利用指定的预训练模型分析输入文本的情感。
+- **可视化**: 可选择使用条形图可视化情感标签的概率分布。
+- **灵活的输出**: 提供灵活的输出，允许进行详细或简洁的情感分析结果。
+
+#### 示例
+```python
+from HanziNLP import sentiment
+
+text = "这个小兄弟弹的太好了"
+sentiment_result = sentiment(text, model='touch20032003/xuyuan-trial-sentiment-bert-chinese', show=True)  # 在 Hugging Face 上输入任何预训练的分类模型
+print('sentiment =', sentiment_result)
+```
+#### 输出
+```python
+sentiment = {'none': 2.7154697818332352e-05, 'disgust': 2.6893396352534182e-05, 'happiness': 0.00047770512173883617, 'like': 0.9991452693939209, 'fear': 3.293586996733211e-05, 'sadness': 0.00013537798076868057, 'anger': 8.243478805525228e-05, 'surprise': 7.21854084986262e-05}
+```
+![示例图片](README_PIC/sentiment.png)
 
 </details>
 
