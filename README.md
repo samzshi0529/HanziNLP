@@ -401,6 +401,31 @@ The `text_similarity` function is meticulously crafted to calculate the similari
 - **Euclidean Similarity**: Utilizes the Euclidean distance between two vectors to compute similarity.
 - **Levenshtein Similarity**: Employs the Levenshtein distance, or "edit distance", between two strings, normalized to a similarity score.
 
+#### example 1: Jaccard Similarity
+```python
+from HanziNLP import text_similarity
+
+sample='你好世界'
+sample1 = '你好世界，hello world'
+text_similarity(sample, sample1, method = 'jaccard')
+```
+#### output 
+```python
+0.5
+```
+
+#### example 1: Levenshtein Similarity
+```python
+from HanziNLP import text_similarity
+
+sample='你好世界'
+sample1 = '你好世界，hello world'
+text_similarity(sample, sample1, method = 'levenshtein')
+```
+#### output 
+```python
+0.07692307692307693
+```
 
 ## 7. Word Embeddings
 
