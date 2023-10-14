@@ -22,7 +22,7 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
   - [7.1 Word2Vec](#71-word2vec)
   - [7.2 BERT Embeddings](#72-bert-embeddings)
 - [8. Topic Modeling](#8-topic-modeling)
-  - [8.1 Latent Dirichlet Allocation (LDA) model](#81-latent-dirichlet-allocation-(lda)-model)
+  - [8.1 Latent Dirichlet Allocation (LDA) model](#81-latent-dirichlet-allocation-lda-model)
   - [8.2 LDA print_topics function](#82-lda-print-topics-function)
 - [9. Sentiment Analysis](#9-sentiment-analysis)
 
