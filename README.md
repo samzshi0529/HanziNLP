@@ -50,8 +50,8 @@ pip install HanziNLP
 🚀 This basic function count the characters and words in your text, sparing you the manual effot of identifying and splitting Chinese words on your own. 
 
 ### char_freq and word_freq Functions
-- `char_freq`: Function to calculate the frequency of each character in a given text.
-- `word_freq`: Function to calculate the frequency of each word in a given text.
+- `char_freq(text, text_only=True)`: Function to calculate the frequency of each character in a given text; If text_only == True, only Chinese and English characters will be counted. If text_only == False, all characters will be counted. Default to be True.
+- `word_freq(text)`: Function to calculate the frequency of each word in a given text.
 ### Code Example
 ```python
 from HanziNLP import char_freq, word_freq
@@ -73,8 +73,8 @@ Word Count: 2
 When visualizing Chinese text in Python environment, font is a vital resource which is often needed from manual importing. HanziNLP have built-in list of fonts for usage right away. You can use list_fonts() to see and filter all available fonts and use get_font() to retrieve a specific font path for visualization purposes. All built-in fonts are from Google fonts that are licensed under the Open Font License, meaning one can use them in your products & projects – print or digital, commercial or otherwise.
 
 ### list_fonts and get_font Functions
-- `list_fonts`: List all available fonts.
-- `get_font`: Retrieve a specific font for visualization purposes.
+- `list_fonts()`: List all available fonts.
+- `get_font(font_name, show=True)`: Retrieve a specific font for visualization purposes.
 
 #### list_fonts() example
 ```python
@@ -128,7 +128,7 @@ plt.show()
 Word Tokenization is a vital step in any NLP tasks. The general step is to segment the sentences, remove stopwords, and tokenize each sentences separately. The detailed instructions are introduced below. 
 
 ### Stopword Management
-To remove stopwords in Chinese text, the package have built-in common stopwords lists include the following ones: (Some stopwords are from [stopwords](https://github.com/goto456/stopwords/)
+To remove stopwords in Chinese text, the package have built-in common stopwords lists include the following ones: (Some stopwords are from [stopwords](https://github.com/goto456/stopwords/))
 
 | Stopword List | File Name |
 |----------|----------|
@@ -159,10 +159,25 @@ stopwords = load_stopwords('common_stopwords.txt') # Enter the txt file name her
 ```
 
 ### Tokenization Specifics
+After selecting a stopword to use, we can begin to tokenize the text using the stopword defined. 
 
 #### sentence_segment and word_tokenize Functions
-- `sentence_segment`: Segment the input text into sentences.
+- `sentence_segment`: Segment the input text into sentences. 
 - `word_tokenize`: Tokenize the input text into words and remove stopwords.
+
+##### sentence_segment example: This example intentially chooses a hard sentence to split.
+```python
+from HanziNLP import sentence_segment
+
+sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
+sentence_segment(sample_sentence)
+```
+##### output 
+```python
+['hello world!', 'This is Sam.', '。', '除非你不说。', '我今天就会很开心,hello .', 'you。']
+```
+
+##### word_tokenize
 
 ## Text Representation
 
