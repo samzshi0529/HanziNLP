@@ -15,7 +15,7 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
 - [5. Text Representation](#5-text-representation)
   - [5.1 BoW (Bag of Words)](#51-bow-bag-of-words)
   - [5.2 ngrams](#52-ngrams)
-  - [5.3 TF_IDF (Term Frequency-Inverse Document Frequency)](#53-tfidf-term-frequency-inverse-document-frequency)
+  - [5.3 TF_IDF (Term Frequency-Inverse Document Frequency)](#53-tf_idf-term-frequency-inverse-document-frequency)
   - [5.4 TT_matrix (Term-Term Matrix)](#54-tt_matrix-term-term-matrix)
 - [6. Text Similarity](#6-text-similarity)
 - [7. Word Embeddings](#7-word-embeddings)
