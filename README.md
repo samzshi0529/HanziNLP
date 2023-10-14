@@ -6,6 +6,7 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
 - [1. Quick Start](#1-quick-start)
   - [1.1 Related Links](#11-related-links)
   - [1.2 Installing and Usage](#12-installing-and-usage)
+  - [1.3 Interactive Dashboard](#13-interactive-dashboard)
 - [2. Character and Word Counting](#2-character-and-word-counting)
 - [3. Font Management](#3-font-management)
 - [4. Text Segmentation](#4-text-segmentation)
@@ -56,13 +57,6 @@ pip install HanziNLP
 
 ### 1.3 Interactive Dashboard
 
-Use the dashboard() by a simple line!
-
-```python
-from HanziNLP import dashboard
-dashboard()
-```
-
 - **Function**: `dashboard()`
 - **Purpose**: Present a user-friendly dashboard that facilitates interactive text analysis and sentiment classification, enabling users to observe the impacts of various pre-trained models and tokenization parameters on the processed text and thereby select the optimal model and parameters for their use case.
 - **Parameters**: No parameters are required.
@@ -81,6 +75,13 @@ The `dashboard` function introduces a user-interactive dashboard, designed to pe
 #### Highlight
 
 The `dashboard` function emphasizes **user engagement** and **exploration**. It allows users to interactively engage with various pre-trained models and tokenization parameters, observing their effects on text analysis and sentiment classification. This interactive exploration enables users to make informed decisions, selecting the model and parameters that best align with their specific use case, thereby enhancing their text analysis and natural language processing (NLP) tasks.
+
+#### Use the dashboard() by a simple line!
+
+```python
+from HanziNLP import dashboard
+dashboard()
+```
 
 ## 2. Character and Word Counting
 
