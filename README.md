@@ -13,6 +13,10 @@ An **user-friendly** and **easy-to-use** Natural Language Processing package spe
   - [4.2 Sentence Segmentation](#42-sentence-segmentation)
   - [4.3 Word Tokenization](#43-word-tokenization)
 - [5. Text Representation](#5-text-representation)
+  - [5.1 BoW (Bag of Words)](#51-bow-bag-of-words)
+  - [5.2 ngrams](#52-ngrams)
+  - [5.3 TF_IDF (Term Frequency-Inverse Document Frequency)](#53-tfidf-term-frequency-inverse-document-frequency)
+  - [5.4 TT_matrix (Term-Term Matrix)](#54-tt_matrix-term-term-matrix)
 - [6. Text Similarity](#6-text-similarity)
 - [7. Word Embeddings](#7-word-embeddings)
 - [8. Topic Modeling](#8-topic-modeling)
@@ -241,7 +245,7 @@ token
 ## 5. Text Representation
 Building text feature map is the starting point for various Machine Learning or Deep Learning tasks. HanziNLP has incorporate the common feature map methods that can be easily implemented.
 
-### BoW (Bag of Words)
+### 5.1 BoW (Bag of Words)
 
 - **Function**: `BoW(segmented_text_list)`
 - **Purpose**: Generate a Bag of Words representation from a list of segmented texts.
@@ -264,7 +268,7 @@ bow
 {'hello': 2, 'world': 1, 'This': 1, 'Sam': 1, '说': 1, '今天': 1, '会': 1, '开心': 1}
 ```
 
-### ngrams
+### 5.2 ngrams
 
 - **Function**: `ngrams(tokens, n=3)`
 - **Purpose**: Create and count the frequency of n-grams from a list of tokens.
@@ -294,7 +298,7 @@ ngram
  '会 开心 hello': 1}
 ```
 
-### TF_IDF (Term Frequency-Inverse Document Frequency)
+### 5.3 TF_IDF (Term Frequency-Inverse Document Frequency)
 
 - **Function**: `TF_IDF(text_list, max_features=None, output_format='sparse')`
 - **Purpose**: Transform a list of texts into a TF-IDF representation.
@@ -306,7 +310,7 @@ ngram
   - `matrix`: TF-IDF matrix in the specified format.
   - `feature_names`: List of feature names.
 
-### TT_matrix (Term-Term Matrix)
+### 5.4 TT_matrix (Term-Term Matrix)
 
 - **Function**: `TT_matrix(tokenized_texts, window_size=1)`
 - **Purpose**: Generate a term-term matrix from a list of tokenized texts, representing term co-occurrences within a specified window.
