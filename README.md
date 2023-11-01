@@ -1228,7 +1228,7 @@ from HanziNLP import sentence_segment, word_tokenize, lda_model, print_topics
 
 sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
 sentences = sentence_segment(sample_sentence)
-tokenized_texts = [sz.word_tokenize(sentence) for sentence in sentences]
+tokenized_texts = [word_tokenize(sentence) for sentence in sentences]
 lda_model, corpus, dictionary = lda_model(tokenized_texts, num_topics=5)
 print_topics(lda_model)
 ```
