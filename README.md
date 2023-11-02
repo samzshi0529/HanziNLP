@@ -136,7 +136,7 @@ list_fonts()
 ```python
 from HanziNLP import get_font
 
-font_path = get_font('ZCOOLXiaoWei-Regular') #在 list_fonts() 中输入您喜欢的 font_name
+font_path = get_font('ZCOOLKuaiLe-Regular') #在 list_fonts() 中输入您喜欢的 font_name
 ```
 #### 输出
 ![示例图片](README_PIC/get_font.png)
@@ -259,7 +259,7 @@ sentence_segment(sample_sentence)
 from HanziNLP import word_tokenize
  
 sample = '除非你不说，我今天就会很开心,hello you#$@#@*' # 一个故意用于标记化的困难文本
-token = sz.word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt', text_only=False, 
+token = word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt', text_only=False, 
                   include_numbers=True, custom_stopwords=None, exclude_default_stopwords=False)
 token
 ```
@@ -272,7 +272,7 @@ token
 from HanziNLP import word_tokenize
 
 sample = '除非你不说，我今天就会很开心,hello you#$@#@*'# 一个故意用于标记化的困难文本
-token = sz.word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt', text_only=True, 
+token = word_tokenize(sample, mode='precise', stopwords='baidu_stopwords.txt', text_only=True, 
                   include_numbers=True, custom_stopwords=['开心'], exclude_default_stopwords=False)
 token
 ```
@@ -354,7 +354,7 @@ from HanziNLP import word_tokenize, TF_IDF
 
 sample_sentence = 'hello world! This is Sam.。 除非你不说。我今天就会很开心,hello .you。'
 token = word_tokenize(sample_sentence, text_only = True)
-tfidf_matrix, feature_names = sz.TF_IDF(token, output_format = 'dataframe')
+tfidf_matrix, feature_names = TF_IDF(token, output_format = 'dataframe')
 tfidf_matrix
 ```
 #### 输出 
