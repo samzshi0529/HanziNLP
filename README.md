@@ -4,8 +4,10 @@
 
 如果HanziNLP能够帮到你，非常希望能够请你给本repository点上🌟！
 
-软件包日志：
-01/05记录:
+## 软件包日志：
+
+### 01/05记录:
+
 可能由于近期hugging face国内连接问题，会有可能软件包在本地pip install的不成功的问题。 在软件包更新前，所有功能仍能在Google Colab上正常使用。在Google Colab上使用dashboard()功能需要输入额外的这行代码来展示dashbaord：
 
 ```python
