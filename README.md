@@ -5,6 +5,8 @@
 如果HanziNLP能够帮到你，非常希望能够请你给本repository点上🌟！
 
 ## 软件包日志：
+[![Downloads](https://static.pepy.tech/badge/hanzinlp)](https://pepy.tech/project/hanzinlp)
+[![Downloads](https://static.pepy.tech/badge/hanzinlp/month)](https://pepy.tech/project/hanzinlp)
 
 ### 01/05记录:
 
