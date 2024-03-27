@@ -7,6 +7,7 @@
 ## 软件包日志：
 [![Downloads](https://static.pepy.tech/badge/hanzinlp)](https://pepy.tech/project/hanzinlp)
 [![Downloads](https://static.pepy.tech/badge/hanzinlp/month)](https://pepy.tech/project/hanzinlp)
+[![Downloads](https://static.pepy.tech/badge/hanzinlp/week)](https://pepy.tech/project/hanzinlp)
 
 ### 01/05记录:
 
