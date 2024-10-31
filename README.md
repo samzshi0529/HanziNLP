@@ -2,7 +2,7 @@
 
 一个**用户友好**且**易于使用**的自然语言处理包，专为中文文本分析、建模和可视化而设计。HanziNLP中的所有功能都支持中文文本，并且非常适用于中文文本分析！
 
-如果HanziNLP能够帮到你，非常希望能够请你给本repository点上🌟！
+如果HanziNLP能够帮到你，非常希望能够请你给本repository点上🌟
 
 ## 软件包日志：
 [![Downloads](https://static.pepy.tech/badge/hanzinlp)](https://pepy.tech/project/hanzinlp)
@@ -11,7 +11,7 @@
 
 ### 01/05记录:
 
-可能由于近期hugging face国内连接问题，会有可能出现软件包在本地pip install不成功的问题。 在软件包更新前，所有功能仍能在Google Colab上正常使用。在Google Colab上使用dashboard()功能需要输入额外的这行代码来展示dashbaord：
+由于hugging face国内连接问题，会有可能出现软件包在本地pip install不成功的问题,建议在Google Colab上使用HanziNLP软件包。在Google Colab上使用dashboard()功能需要输入额外的这行代码来展示dashbaord：
 
 ```python
 from google.colab import output
@@ -673,6 +673,8 @@ Zhan, Shi. (2023). HanziNLP (Version 0.1.0) [Software]. GitHub. [https://github.
 An **user-friendly** and **easy-to-use** Natural Language Processing package specifically designed for Chinese text analysis, modeling, and visualization. All functions in HanziNLP supports Chinese text and works well for Chinese text!
 
 If you find HanziNLP helpful, it will be greatly important that you can add a 🌟 to this repository! Thanks!
+
+**Please use Google Colab or other virtual environments to use the package while it will be hard to construct the environment with different versions of third party packages.**
 
 ## Table of Contents
 - [1. Quick Start](#1-quick-start)
