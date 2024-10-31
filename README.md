@@ -11,7 +11,7 @@
 
 ### 01/05记录:
 
-由于hugging face国内连接问题，会有可能出现软件包在本地pip install不成功的问题,建议在Google Colab上使用HanziNLP软件包。在Google Colab上使用dashboard()功能需要输入额外的这行代码来展示dashbaord：
+由于hugging face国内连接问题，会有可能出现软件包在本地pip install不成功的问题,建议在**Google Colab**上使用HanziNLP软件包。在Google Colab上使用dashboard()功能需要输入额外的这行代码来展示dashbaord：
 
 ```python
 from google.colab import output
