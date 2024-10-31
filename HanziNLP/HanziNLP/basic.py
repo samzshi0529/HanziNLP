@@ -18,8 +18,8 @@ from gensim.models import KeyedVectors
 from gensim import corpora
 from gensim.models import LdaModel
 from gensim.models import CoherenceModel
-import fasttext
-import fasttext.util
+# import fasttext
+# import fasttext.util
 from transformers import AutoTokenizer, BertModel, AutoModelForSequenceClassification
 from transformers import BertTokenizer, BertForSequenceClassification
 import torch
@@ -464,45 +464,45 @@ def text_similarity(text1, text2, method='cosine'):
 
     return similarity
 
-def Word2Vec(text, dimension=300):
-    """
-    Get embeddings for text containing both English and Chinese words.
+# def Word2Vec(text, dimension=300):
+#     """
+#     Get embeddings for text containing both English and Chinese words.
 
-    Parameters:
-    text (str): The input text which may contain both English and Chinese words.
-    dimension (int): Dimensionality of the resulting word embeddings. Default is 300.
+#     Parameters:
+#     text (str): The input text which may contain both English and Chinese words.
+#     dimension (int): Dimensionality of the resulting word embeddings. Default is 300.
 
-    Returns:
-    list of numpy.ndarray: A list of word embeddings for each word in the text.
-    """
-    # Download the English and Chinese models if they are not downloaded
-    fasttext.util.download_model('en', if_exists='ignore')
-    fasttext.util.download_model('zh', if_exists='ignore')
+#     Returns:
+#     list of numpy.ndarray: A list of word embeddings for each word in the text.
+#     """
+#     # Download the English and Chinese models if they are not downloaded
+#     fasttext.util.download_model('en', if_exists='ignore')
+#     fasttext.util.download_model('zh', if_exists='ignore')
 
-    # Load the models
-    en_model = fasttext.load_model('cc.en.300.bin')
-    zh_model = fasttext.load_model('cc.zh.300.bin')
+#     # Load the models
+#     en_model = fasttext.load_model('cc.en.300.bin')
+#     zh_model = fasttext.load_model('cc.zh.300.bin')
 
-    # Reduce model dimensionality if requested
-    if dimension < 300:
-        fasttext.util.reduce_model(en_model, dimension)
-        fasttext.util.reduce_model(zh_model, dimension)
+#     # Reduce model dimensionality if requested
+#     if dimension < 300:
+#         fasttext.util.reduce_model(en_model, dimension)
+#         fasttext.util.reduce_model(zh_model, dimension)
 
-    # Tokenize and get embeddings
-    embeddings = []
-    words = word_tokenize(text)  # tokenizer
+#     # Tokenize and get embeddings
+#     embeddings = []
+#     words = word_tokenize(text)  # tokenizer
 
-    for word in words:
-        if re.match("[\u4e00-\u9fff]+", word):  # if the word contains Chinese characters
-            embeddings.append(zh_model.get_word_vector(word))
-        else:
-            embeddings.append(en_model.get_word_vector(word))
+#     for word in words:
+#         if re.match("[\u4e00-\u9fff]+", word):  # if the word contains Chinese characters
+#             embeddings.append(zh_model.get_word_vector(word))
+#         else:
+#             embeddings.append(en_model.get_word_vector(word))
     
-    # Unload models to free up memory
-    del en_model
-    del zh_model
+#     # Unload models to free up memory
+#     del en_model
+#     del zh_model
     
-    return embeddings
+#     return embeddings
 
 def get_bert_embeddings(text, model="bert-base-chinese"):
     """

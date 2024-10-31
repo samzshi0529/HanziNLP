@@ -16,7 +16,6 @@ setup(
         'pandas',
         'numpy',
         'gensim',
-        'fasttext',
         'transformers',
         'torch',
         'ipywidgets>=7.6.3',
