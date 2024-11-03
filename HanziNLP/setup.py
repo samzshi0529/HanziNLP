@@ -17,6 +17,7 @@ setup(
         'numpy',
         'gensim',
         'transformers',
+        'fasttext'
         'torch',
         'ipywidgets>=7.6.3',
         'IPython>=7.27.0',
